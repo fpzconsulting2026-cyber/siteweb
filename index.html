@@ -417,7 +417,7 @@ footer { border-top: 1px solid var(--line); padding-block: 2.2rem; }
           <div class="phone-stage" id="phoneStage">
             <canvas id="phoneCanvas"></canvas>
             <span class="phone-stage__hint">Glisser pour explorer</span>
-            <span class="phone-stage__tag">Field telephone · vintage</span>
+            <span class="phone-stage__tag">Téléphone d'époque · vintage</span>
             <div class="phone-stage__fallback">Le téléphone qui a fait ses preuves</div>
           </div>
         </div>
@@ -987,119 +987,161 @@ footer { border-top: 1px solid var(--line); padding-block: 2.2rem; }
   fill.position.set(-2.2, 2.6, 3.2);
   scene.add(fill);
 
-  /* ---------- Materials ---------- */
-  var bakelite = new THREE.MeshStandardMaterial({ color: 0x171310, roughness: 0.42, metalness: 0.14 });
-  var bakeliteEdge = new THREE.MeshStandardMaterial({ color: 0x0d0b09, roughness: 0.55, metalness: 0.1 });
-  var brass = new THREE.MeshStandardMaterial({ color: 0xd0ac61, roughness: 0.3, metalness: 0.88, emissive: 0x3a2c10, emissiveIntensity: 0.18 });
-  var steel = new THREE.MeshStandardMaterial({ color: 0x2a3040, roughness: 0.4, metalness: 0.72 });
-  var leather = new THREE.MeshStandardMaterial({ color: 0x241a12, roughness: 0.78, metalness: 0.04 });
+  /* ---------- Materials: antiqued gold/brass throughout, like the reference rotary phone ---------- */
+  var brass = new THREE.MeshStandardMaterial({ color: 0xcda54a, roughness: 0.28, metalness: 0.9, emissive: 0x3a2c10, emissiveIntensity: 0.12 });
+  var brassDark = new THREE.MeshStandardMaterial({ color: 0x7d5f28, roughness: 0.45, metalness: 0.82, emissive: 0x1e1608, emissiveIntensity: 0.1 });
+  var brassDeep = new THREE.MeshStandardMaterial({ color: 0x5a4420, roughness: 0.55, metalness: 0.75 });
+  var black = new THREE.MeshStandardMaterial({ color: 0x0e0d0c, roughness: 0.5, metalness: 0.25 });
 
-  /* ---------- Build a stylised WWII-era field telephone ---------- */
-  function buildFieldPhone() {
+  /* ---------- Build a stylised ornate brass rotary telephone ---------- */
+  function buildRotaryPhone() {
     var g = new THREE.Group();
 
-    var body = new THREE.Mesh(new THREE.BoxGeometry(2.6, 1.55, 1.3), bakelite);
-    g.add(body);
+    /* tiered base plinth, tapering upward */
+    var tier1 = new THREE.Mesh(new THREE.BoxGeometry(2.5, 0.22, 1.7), brass);
+    tier1.position.y = -0.86;
+    g.add(tier1);
+    var tier2 = new THREE.Mesh(new THREE.BoxGeometry(2.05, 0.18, 1.35), brassDark);
+    tier2.position.y = -0.65;
+    g.add(tier2);
+    var tier3 = new THREE.Mesh(new THREE.BoxGeometry(1.7, 0.16, 1.1), brass);
+    tier3.position.y = -0.49;
+    g.add(tier3);
 
-    var lid = new THREE.Mesh(new THREE.BoxGeometry(2.66, 0.12, 1.36), bakeliteEdge);
-    lid.position.y = 0.83;
-    g.add(lid);
-
-    var cornerGeo = new THREE.BoxGeometry(0.16, 1.66, 0.16);
-    var cx = 1.28, cz = 0.62;
-    [[cx, cz], [cx, -cz], [-cx, cz], [-cx, -cz]].forEach(function (p) {
-      var m = new THREE.Mesh(cornerGeo, brass);
-      m.position.set(p[0], 0, p[1]);
-      g.add(m);
+    /* four scrolled feet */
+    var footGeo = new THREE.SphereGeometry(0.11, 10, 10);
+    [[1.05, 0.7], [1.05, -0.7], [-1.05, 0.7], [-1.05, -0.7]].forEach(function (p) {
+      var foot = new THREE.Mesh(footGeo, brassDark);
+      foot.position.set(p[0], -1.0, p[1]);
+      foot.scale.set(1, 0.65, 1);
+      g.add(foot);
     });
 
-    var rivetGeo = new THREE.SphereGeometry(0.028, 10, 10);
-    for (var i = -1; i <= 1; i++) {
-      for (var j = -1; j <= 1; j++) {
-        if (i === 0 && j === 0) continue;
-        var riv = new THREE.Mesh(rivetGeo, brass);
-        riv.position.set(i * 0.9, j * 0.55, 0.66);
-        g.add(riv);
-      }
+    /* small decorative studs along the base edge */
+    var studGeo = new THREE.SphereGeometry(0.035, 8, 8);
+    for (var s = -1; s <= 1; s += 0.5) {
+      [0.83, -0.83].forEach(function (z) {
+        var stud = new THREE.Mesh(studGeo, brassDeep);
+        stud.position.set(s * 1.15, -0.86, z);
+        g.add(stud);
+      });
     }
 
-    var plate = new THREE.Mesh(new THREE.BoxGeometry(0.9, 0.28, 0.02), brass);
-    plate.position.set(0, -0.15, 0.665);
-    g.add(plate);
+    /* rotary dial, tilted up toward the viewer, mounted on the base's front-top edge */
+    var dial = new THREE.Group();
+    var dialFace = new THREE.Mesh(new THREE.CylinderGeometry(0.46, 0.46, 0.09, 32), brass);
+    dial.add(dialFace);
+    var dialBezel = new THREE.Mesh(new THREE.TorusGeometry(0.44, 0.03, 10, 32), brassDeep);
+    dialBezel.rotation.x = Math.PI / 2;
+    dial.add(dialBezel);
+    var holeGeo = new THREE.CylinderGeometry(0.044, 0.044, 0.11, 12);
+    var HOLES = 10;
+    for (var h = 0; h < HOLES; h++) {
+      var a = (h / HOLES) * Math.PI * 2;
+      var hole = new THREE.Mesh(holeGeo, black);
+      hole.position.set(Math.cos(a) * 0.31, 0.02, Math.sin(a) * 0.31);
+      dial.add(hole);
+    }
+    var hub = new THREE.Mesh(new THREE.CylinderGeometry(0.12, 0.14, 0.14, 20), brassDark);
+    hub.position.y = 0.1;
+    dial.add(hub);
+    var hubCap = new THREE.Mesh(new THREE.CylinderGeometry(0.055, 0.055, 0.035, 16), black);
+    hubCap.position.y = 0.17;
+    dial.add(hubCap);
+    dial.position.set(0.05, -0.22, 0.62);
+    dial.rotation.x = -0.85;
+    g.add(dial);
 
-    var crankHousing = new THREE.Mesh(new THREE.CylinderGeometry(0.34, 0.34, 0.5, 20), steel);
-    crankHousing.rotation.z = Math.PI / 2;
-    crankHousing.position.set(1.55, 0.35, 0);
-    g.add(crankHousing);
+    /* vertical riser connecting the base to the ornate overhead yoke */
+    var riser = new THREE.Mesh(new THREE.CylinderGeometry(0.09, 0.11, 1.0, 16), brass);
+    riser.position.set(0.05, 0.3, 0.05);
+    g.add(riser);
+    var riserCollar = new THREE.Mesh(new THREE.TorusGeometry(0.13, 0.035, 8, 20), brassDark);
+    riserCollar.rotation.x = Math.PI / 2;
+    riserCollar.position.set(0.05, 0.78, 0.05);
+    g.add(riserCollar);
 
-    var crankArm = new THREE.Mesh(new THREE.BoxGeometry(0.55, 0.06, 0.06), brass);
-    crankArm.position.set(1.85, 0.35, 0);
-    var crankHandle = new THREE.Mesh(new THREE.CylinderGeometry(0.05, 0.05, 0.16, 12), bakelite);
-    crankHandle.position.set(0.24, 0, 0);
-    crankHandle.rotation.z = Math.PI / 2;
-    crankArm.add(crankHandle);
-    g.add(crankArm);
+    /* ornate horizontal yoke bar, brass ball finial on the left */
+    var yoke = new THREE.Mesh(new THREE.CylinderGeometry(0.075, 0.075, 2.3, 16), brass);
+    yoke.rotation.z = Math.PI / 2;
+    yoke.position.set(0.05, 1.0, 0.05);
+    g.add(yoke);
+    var finial = new THREE.Mesh(new THREE.SphereGeometry(0.14, 14, 14), brassDark);
+    finial.position.set(-1.05, 1.0, 0.05);
+    g.add(finial);
 
-    var strapGeo = new THREE.TorusGeometry(0.16, 0.045, 8, 16, Math.PI);
-    [-0.85, 0.85].forEach(function (x) {
-      var s = new THREE.Mesh(strapGeo, leather);
-      s.position.set(x, 0.89, 0);
-      s.rotation.x = Math.PI / 2;
-      g.add(s);
+    /* right side: large ribbed brass bell housing capping the yoke, like the ornamental drum in the reference */
+    var bellHousing = new THREE.Mesh(new THREE.CylinderGeometry(0.34, 0.34, 0.6, 24), brass);
+    bellHousing.rotation.z = Math.PI / 2;
+    bellHousing.position.set(1.35, 1.0, 0.05);
+    g.add(bellHousing);
+    [-0.22, 0, 0.22].forEach(function (x) {
+      var band = new THREE.Mesh(new THREE.TorusGeometry(0.345, 0.02, 8, 24), brassDeep);
+      band.rotation.y = Math.PI / 2;
+      band.position.set(1.35 + x, 1.0, 0.05);
+      g.add(band);
     });
+    var bellCap = new THREE.Mesh(new THREE.SphereGeometry(0.34, 18, 18, 0, Math.PI * 2, 0, Math.PI / 2), brassDark);
+    bellCap.rotation.z = -Math.PI / 2;
+    bellCap.position.set(1.65, 1.0, 0.05);
+    g.add(bellCap);
 
-    var postGeo = new THREE.CylinderGeometry(0.045, 0.045, 0.22, 10);
-    [-0.6, 0.6].forEach(function (x) {
-      var post = new THREE.Mesh(postGeo, brass);
-      post.position.set(x, 0.94, -0.15);
-      g.add(post);
-    });
+    /* left side: small cradle bracket hardware, just under the finial */
+    var cradleHook = new THREE.Mesh(new THREE.TorusGeometry(0.16, 0.032, 8, 16, Math.PI), brassDark);
+    cradleHook.position.set(-1.05, 0.8, 0.12);
+    cradleHook.rotation.x = -0.3;
+    cradleHook.rotation.z = Math.PI;
+    g.add(cradleHook);
 
-    /* handset: cylinder body + two capped ends, resting across the cradle posts */
+    /* handset resting diagonally across the yoke: earpiece up-left in the cradle, mouthpiece down toward the dial */
     var handset = new THREE.Group();
-    var hBody = new THREE.Mesh(new THREE.CylinderGeometry(0.085, 0.085, 0.9, 14), bakelite);
+    var hBody = new THREE.Mesh(new THREE.CylinderGeometry(0.075, 0.09, 1.35, 16), brass);
     hBody.rotation.z = Math.PI / 2;
     handset.add(hBody);
-    [-0.5, 0.5].forEach(function (x) {
-      var cap = new THREE.Mesh(new THREE.SphereGeometry(0.135, 16, 16), bakeliteEdge);
+    [-0.72, 0.72].forEach(function (x) {
+      var cap = new THREE.Mesh(new THREE.SphereGeometry(0.19, 18, 18), brassDark);
       cap.position.x = x;
+      cap.scale.set(1, 1, 0.85);
       handset.add(cap);
-      var ring = new THREE.Mesh(new THREE.TorusGeometry(0.11, 0.012, 8, 20), brass);
+      var ring = new THREE.Mesh(new THREE.TorusGeometry(0.15, 0.016, 8, 22), brassDeep);
       ring.position.x = x;
       ring.rotation.y = Math.PI / 2;
       handset.add(ring);
+      var speakerHoleGeo = new THREE.SphereGeometry(0.014, 6, 6);
+      for (var sh = 0; sh < 6; sh++) {
+        var sa = (sh / 6) * Math.PI * 2;
+        var sHole = new THREE.Mesh(speakerHoleGeo, black);
+        sHole.position.set(x + 0.09, Math.cos(sa) * 0.09, Math.sin(sa) * 0.09);
+        handset.add(sHole);
+      }
     });
-    handset.position.set(0, 1.08, -0.15);
-    handset.rotation.z = -0.035;
+    handset.position.set(-0.15, 0.62, 0.5);
+    handset.rotation.z = -0.58;
+    handset.rotation.y = 0.22;
     g.add(handset);
 
-    /* coiled cord: a helical tube from handset down to the body */
+    /* coiled cord: a helical tube from the handset's mouthpiece end down to the base */
     var coilPts = [];
-    var turns = 7, coilR = 0.09, coilLen = 1.05;
+    var turns = 7, coilR = 0.09, coilLen = 1.1;
     for (var t = 0; t <= 1; t += 1 / 80) {
       var ang = t * turns * Math.PI * 2;
       coilPts.push(new THREE.Vector3(Math.cos(ang) * coilR, -t * coilLen, Math.sin(ang) * coilR));
     }
     var coilCurve = new THREE.CatmullRomCurve3(coilPts);
-    var coilGeo = new THREE.TubeGeometry(coilCurve, 200, 0.018, 6, false);
-    var coil = new THREE.Mesh(coilGeo, bakeliteEdge);
-    coil.position.set(-0.15, 0.55, 0.15);
-    coil.rotation.x = 0.5;
+    var coilGeo = new THREE.TubeGeometry(coilCurve, 200, 0.017, 6, false);
+    var coil = new THREE.Mesh(coilGeo, black);
+    coil.position.set(0.6, 0.1, 0.5);
+    coil.rotation.x = 0.3;
+    coil.rotation.y = 0.5;
     g.add(coil);
 
-    var railGeo = new THREE.BoxGeometry(2.5, 0.06, 0.1);
-    [0.55, -0.55].forEach(function (z) {
-      var r = new THREE.Mesh(railGeo, steel);
-      r.position.set(0, -0.8, z);
-      g.add(r);
-    });
-
-    g.scale.setScalar(0.92);
+    g.scale.setScalar(0.86);
+    g.position.y = 0.1;
     return g;
   }
 
   var rig = new THREE.Group();
-  rig.add(buildFieldPhone());
+  rig.add(buildRotaryPhone());
   scene.add(rig);
 
   /* ---------- Soft contact-shadow blob beneath the phone ---------- */
