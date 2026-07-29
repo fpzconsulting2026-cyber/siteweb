@@ -344,8 +344,8 @@ footer { border-top: 1px solid var(--line); padding-block: 2.2rem; }
 .hero__copy{min-width:0;}
 .hero__visual{display:flex;justify-content:center;}
 
-/* This panel is a deliberately dark "spotlight" card for the 3D scene, independent of the
-   page's light theme above — its colors are fixed rather than routed through the shared tokens. */
+/* This panel is a deliberately bold, colorful "stage" for the 3D scene — a vivid blue card
+   rather than a somber dark antique one, so its colors are fixed independent of the page tokens. */
 .phone-stage{
   position:relative;
   width:100%;
@@ -354,19 +354,26 @@ footer { border-top: 1px solid var(--line); padding-block: 2.2rem; }
   border-radius:18px;
   overflow:hidden;
   background:
-    radial-gradient(120% 120% at 50% 14%, rgba(78,130,247,0.2), transparent 60%),
-    linear-gradient(165deg, #101a2e, #0a1020);
-  box-shadow: 0 16px 32px -18px rgba(0,0,0,.6), inset 0 1px 0 rgba(255,255,255,.04);
+    radial-gradient(120% 120% at 50% 14%, rgba(255,207,158,0.25), transparent 60%),
+    linear-gradient(165deg, #3358e0, #16276b);
+  box-shadow: 0 16px 32px -18px rgba(22,39,107,.45), inset 0 1px 0 rgba(255,255,255,.08);
 }
 @media (max-width:640px){.phone-stage{max-width:320px;}}
 .phone-stage canvas{position:absolute;inset:0;width:100%!important;height:100%!important;display:block;touch-action:none;}
-.phone-stage__tag{position:absolute;left:1rem;bottom:.95rem;z-index:3;display:inline-flex;align-items:center;gap:.5rem;font-family:var(--mono);font-size:var(--s--1);letter-spacing:.08em;text-transform:uppercase;color:#d0ac61;pointer-events:none;}
-.phone-stage__tag::before{content:"";width:6px;height:6px;border-radius:50%;background:#d0ac61;}
-.phone-stage__hint{position:absolute;right:1rem;top:.9rem;z-index:3;font-family:var(--mono);font-size:.75rem;letter-spacing:.08em;text-transform:uppercase;color:#7885aa;opacity:.75;pointer-events:none;}
+.phone-stage__tag{position:absolute;left:1rem;bottom:.95rem;z-index:3;display:inline-flex;align-items:center;gap:.5rem;font-family:var(--mono);font-size:var(--s--1);letter-spacing:.08em;text-transform:uppercase;color:#ffe8c2;pointer-events:none;}
+.phone-stage__tag::before{content:"";width:6px;height:6px;border-radius:50%;background:#ffe8c2;}
+.phone-stage__hint{position:absolute;right:1rem;top:.9rem;z-index:3;font-family:var(--mono);font-size:.75rem;letter-spacing:.08em;text-transform:uppercase;color:#d7e2ff;opacity:.8;pointer-events:none;}
 @media (max-width:640px){.phone-stage__hint{display:none;}}
-.phone-stage__fallback{position:absolute;inset:0;display:none;place-items:center;font-family:var(--display);font-weight:700;font-size:var(--s-1);color:#94a2c2;text-align:center;padding:2rem;}
+.phone-stage__fallback{position:absolute;inset:0;display:none;place-items:center;font-family:var(--display);font-weight:700;font-size:var(--s-1);color:#eaf0ff;text-align:center;padding:2rem;}
 .phone-stage.is-fallback .phone-stage__fallback{display:grid;}
 .phone-stage.is-fallback canvas{display:none;}
+
+/* "Mon univers" personal section: text + a small real-photo diptych */
+.univers-grid{display:grid;grid-template-columns:1fr;gap:2.2rem;align-items:start;}
+@media (min-width:900px){.univers-grid{grid-template-columns:1.05fr .95fr;gap:3rem;}}
+.univers-photos{display:grid;grid-template-columns:1fr 1fr;gap:1rem;align-self:start;}
+.univers-photo{width:100%;height:100%;aspect-ratio:3/4;object-fit:cover;border-radius:10px;border:1px solid var(--line);box-shadow:0 20px 40px -26px rgba(20,19,16,.3);display:block;}
+.univers-photo--main{align-self:end;}
 
 /* Scroll cue under the hero stats */
 .scroll-cue{display:flex;flex-direction:column;align-items:center;gap:.5rem;margin-top:2.6rem;font-family:var(--mono);font-size:.75rem;letter-spacing:.16em;text-transform:uppercase;color:var(--muted-2);opacity:.75;}
@@ -387,6 +394,7 @@ footer { border-top: 1px solid var(--line); padding-block: 2.2rem; }
     </a>
     <nav class="nav__links" aria-label="Navigation principale">
       <a href="#resultats">Résultats</a>
+      <a href="#univers">Mon univers</a>
       <a href="#methode">Méthode</a>
       <a href="#pipeline">Pipeline</a>
       <a href="#pourquoi">Pourquoi moi</a>
@@ -419,7 +427,7 @@ footer { border-top: 1px solid var(--line); padding-block: 2.2rem; }
           <div class="phone-stage" id="phoneStage">
             <canvas id="phoneCanvas"></canvas>
             <span class="phone-stage__hint">Glisser pour explorer</span>
-            <span class="phone-stage__tag">Téléphone d'époque · vintage</span>
+            <span class="phone-stage__tag">Toujours partant · fun</span>
             <div class="phone-stage__fallback">Le téléphone qui a fait ses preuves</div>
           </div>
         </div>
@@ -563,6 +571,27 @@ footer { border-top: 1px solid var(--line); padding-block: 2.2rem; }
           <span class="tag">Travel</span>
           <span class="tag">Green Tech</span>
         </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="band" id="univers">
+    <div class="wrap univers-grid">
+      <div>
+        <div class="sec-head reveal">
+          <p class="num">Hors du bureau</p>
+          <h2>Dans ma 4L comme au téléphone&nbsp;: je prends de la <span class="hl">hauteur</span>, je mets la <span class="hl">vitesse</span>.</h2>
+          <p class="lead">Rallye du Maroc au désert (8&nbsp;500&nbsp;km), 4Alpes dans la montagne (23&nbsp;cols, 4&nbsp;000&nbsp;km)&nbsp;: la même 4L bleue, «&nbsp;Le soleil&nbsp;», m'a appris à lire un terrain difficile, garder le cap et avancer quand tout le monde ralentit. Sur votre prospection, c'est la même conduite&nbsp;: je prends de la hauteur sur votre marché avant de foncer, et je mets la vitesse une fois la trajectoire choisie.</p>
+        </div>
+        <div class="bio__meta reveal" aria-label="Terrain de jeu, en dehors du travail">
+          <span class="tag">4L Trophy · Maroc</span>
+          <span class="tag">4Alpes · Montagne</span>
+          <span class="tag">Rétromobile · Passionnés</span>
+        </div>
+      </div>
+      <div class="univers-photos reveal">
+        <img class="univers-photo univers-photo--main" src="assets/univers-le-soleil.jpg" alt="La 4L bleue de Florian, « Le soleil », garée dans une ruelle" loading="lazy" width="562" height="1000">
+        <img class="univers-photo" src="assets/univers-alpes.jpg" alt="Rallye 4Alpes : des dizaines de Renault 4 alignées sur une route de montagne" loading="lazy" width="750" height="1000">
       </div>
     </div>
   </section>
@@ -974,29 +1003,29 @@ footer { border-top: 1px solid var(--line); padding-block: 2.2rem; }
   renderer.toneMappingExposure = 1.05;
 
   var scene = new THREE.Scene();
-  scene.fog = new THREE.FogExp2(0x080c17, 0.1);
+  scene.fog = new THREE.FogExp2(0x1f3aa8, 0.07);
 
   var camera = new THREE.PerspectiveCamera(38, 1, 0.1, 100);
   camera.position.set(0, 0.35, 6.4);
   camera.lookAt(0, 0, 0);
 
-  /* ---------- Lighting: cool blue key + warm brass rim, matching the site palette ---------- */
-  scene.add(new THREE.HemisphereLight(0x9dbafb, 0x0a1020, 0.6));
-  var key = new THREE.DirectionalLight(0x9dbafb, 1.15);
+  /* ---------- Lighting: cool blue key + warm cream rim, playful rather than moody ---------- */
+  scene.add(new THREE.HemisphereLight(0xffffff, 0xd7ccae, 0.85));
+  var key = new THREE.DirectionalLight(0xffffff, 1.1);
   key.position.set(3.2, 4, 5);
   scene.add(key);
-  var rim = new THREE.PointLight(0xd0ac61, 2.4, 16, 2);
+  var rim = new THREE.PointLight(0xffcf9e, 2.0, 16, 2);
   rim.position.set(-3.4, -1.2, -2.4);
   scene.add(rim);
-  var fill = new THREE.PointLight(0x4e82f7, 1.2, 16, 2);
+  var fill = new THREE.PointLight(0x3358e0, 1.1, 16, 2);
   fill.position.set(-2.2, 2.6, 3.2);
   scene.add(fill);
 
-  /* ---------- Materials: antiqued gold/brass throughout, like the reference rotary phone ---------- */
-  var brass = new THREE.MeshStandardMaterial({ color: 0xcda54a, roughness: 0.28, metalness: 0.9, emissive: 0x3a2c10, emissiveIntensity: 0.12 });
-  var brassDark = new THREE.MeshStandardMaterial({ color: 0x7d5f28, roughness: 0.45, metalness: 0.82, emissive: 0x1e1608, emissiveIntensity: 0.1 });
-  var brassDeep = new THREE.MeshStandardMaterial({ color: 0x5a4420, roughness: 0.55, metalness: 0.75 });
-  var black = new THREE.MeshStandardMaterial({ color: 0x0e0d0c, roughness: 0.5, metalness: 0.25 });
+  /* ---------- Materials: glossy toy-like plastic in the site's own colors, not antique metal ---------- */
+  var brass = new THREE.MeshStandardMaterial({ color: 0x3358e0, roughness: 0.22, metalness: 0.08 });
+  var brassDark = new THREE.MeshStandardMaterial({ color: 0xfbf7ec, roughness: 0.26, metalness: 0.06 });
+  var brassDeep = new THREE.MeshStandardMaterial({ color: 0xf0522f, roughness: 0.28, metalness: 0.08 });
+  var black = new THREE.MeshStandardMaterial({ color: 0x171410, roughness: 0.4, metalness: 0.1 });
 
   /* ---------- Build a stylised ornate brass rotary telephone ---------- */
   function buildRotaryPhone() {
@@ -1167,7 +1196,7 @@ footer { border-top: 1px solid var(--line); padding-block: 2.2rem; }
   shadowMesh.position.y = -1.55;
   scene.add(shadowMesh);
 
-  /* ---------- Drifting brass/blue dust motes ---------- */
+  /* ---------- Drifting cream/coral confetti motes, playful against the blue stage ---------- */
   var motesTex = (function () {
     var c = document.createElement('canvas');
     c.width = c.height = 32;
@@ -1183,7 +1212,7 @@ footer { border-top: 1px solid var(--line); padding-block: 2.2rem; }
   var motePos = new Float32Array(MOTE_COUNT * 3);
   var moteColor = new Float32Array(MOTE_COUNT * 3);
   var moteSpeed = new Float32Array(MOTE_COUNT);
-  var brassC = new THREE.Color(0xd0ac61), blueC = new THREE.Color(0x9dbafb);
+  var brassC = new THREE.Color(0xf0522f), blueC = new THREE.Color(0xfbf7ec);
   for (var m = 0; m < MOTE_COUNT; m++) {
     var ang2 = Math.random() * Math.PI * 2;
     var rad = 1.4 + Math.random() * 2.1;
