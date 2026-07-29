@@ -344,6 +344,12 @@ footer { border-top: 1px solid var(--line); padding-block: 2.2rem; }
 .hero__copy{min-width:0;}
 .hero__visual{display:flex;align-items:center;justify-content:center;}
 
+/* Personal hook strip at the very top of the hero: a real photo + a direct line */
+.hero__intro{display:flex;align-items:center;gap:.85rem;margin-bottom:1.5rem;}
+.hero__intro-photo{width:60px;height:60px;border-radius:50%;object-fit:cover;flex:none;border:2px solid var(--blue);box-shadow:0 10px 22px -12px rgba(51,88,224,.55);}
+.hero__intro-text{font-family:var(--display);font-weight:700;font-size:var(--s-0);line-height:1.25;color:var(--paper);}
+.hero__intro-text span{display:block;font-family:var(--mono);font-weight:400;font-size:var(--s--1);letter-spacing:0;text-transform:none;color:var(--muted);margin-top:.2rem;}
+
 /* A simple, honest gag instead of a 3D showpiece: a big call button that rings on hover
    and dials Florian directly on click. */
 .ring-widget{position:relative;display:grid;place-items:center;width:184px;height:184px;border-radius:50%;background:linear-gradient(160deg, var(--blue), var(--blue-deep));color:#fff;text-decoration:none;box-shadow:0 24px 48px -22px rgba(51,88,224,.5);transition:transform .25s ease;}
@@ -397,6 +403,10 @@ footer { border-top: 1px solid var(--line); padding-block: 2.2rem; }
     <div class="wrap hero__inner">
       <div class="hero__grid">
         <div class="hero__copy">
+          <div class="hero__intro reveal">
+            <img class="hero__intro-photo" src="assets/hero-hook-florian.jpg" alt="Florian Penez, souriant" width="230" height="300">
+            <p class="hero__intro-text">Montez à bord avec moi<span>Le SDR qui décroche vraiment son téléphone</span></p>
+          </div>
           <p class="eyebrow">SDR Senior · Closer · Setter BtoB · <span class="kicker">Francophonie</span></p>
           <h1>Récupérez <span class="hl">15 heures par semaine</span> sur votre prospection BtoB.</h1>
           <p class="lead">Les équipes commerciales automatisent, envoient les mêmes séquences à tout le monde et attendent des réponses qui ne viennent plus. Moi, j'appelle. Vraiment. Approche personnalisée, vraie conversation, et 3 à 6 rendez&#8209;vous qualifiés par jour dans votre agenda.</p>
