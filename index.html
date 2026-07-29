@@ -334,6 +334,28 @@ footer { border-top: 1px solid var(--line); padding-block: 2.2rem; }
 .btn:hover::after{transform:translateX(130%);}
 .btn > *{position:relative;z-index:2;}
 
+/* Hero two-column layout: copy + 3D visual */
+.hero__grid{position:relative;z-index:2;display:grid;grid-template-columns:1fr;gap:2.6rem;align-items:center;}
+@media (min-width:980px){
+  .hero__grid{grid-template-columns:.98fr 1.02fr;gap:2.2rem;}
+  /* The two-column layout leaves less room per line than the old full-width hero, so trim the display size to match */
+  .hero__copy h1{font-size:clamp(2.3rem, 1rem + 2.7vw, 3.75rem); max-width:15ch;}
+}
+.hero__copy{min-width:0;}
+.hero__visual{display:flex;align-items:center;justify-content:center;}
+
+/* A simple, honest gag instead of a 3D showpiece: a big call button that rings on hover
+   and dials Florian directly on click. */
+.ring-widget{position:relative;display:grid;place-items:center;width:184px;height:184px;border-radius:50%;background:linear-gradient(160deg, var(--blue), var(--blue-deep));color:#fff;text-decoration:none;box-shadow:0 24px 48px -22px rgba(51,88,224,.5);transition:transform .25s ease;}
+.ring-widget:hover,.ring-widget:focus-visible{transform:scale(1.06);}
+.ring-widget__icon{width:64px;height:64px;position:relative;z-index:2;}
+.ring-widget__pulse{position:absolute;inset:0;border-radius:50%;border:2px solid var(--blue);opacity:.55;animation:ring-pulse 2.4s ease-out infinite;pointer-events:none;}
+.ring-widget__pulse--2{animation-delay:.6s;}
+@keyframes ring-pulse{0%{transform:scale(1);opacity:.55;}100%{transform:scale(1.55);opacity:0;}}
+.ring-widget:hover .ring-widget__pulse,.ring-widget:focus-visible .ring-widget__pulse{animation-duration:.8s;}
+.ring-widget__label{position:absolute;top:calc(100% + 1rem);left:50%;transform:translateX(-50%);width:14rem;text-align:center;font-family:var(--mono);font-size:var(--s--1);letter-spacing:.02em;color:var(--muted);}
+@media (prefers-reduced-motion: reduce){.ring-widget__pulse{animation:none;}}
+
 /* "Mon univers" personal section: text + a small real-photo diptych */
 .univers-grid{display:grid;grid-template-columns:1fr;gap:2.2rem;align-items:start;}
 @media (min-width:900px){.univers-grid{grid-template-columns:1.05fr .95fr;gap:3rem;}}
@@ -373,18 +395,30 @@ footer { border-top: 1px solid var(--line); padding-block: 2.2rem; }
   <section class="hero">
     <canvas id="wave" aria-hidden="true"></canvas>
     <div class="wrap hero__inner">
-      <p class="eyebrow">SDR Senior · Closer · Setter BtoB · <span class="kicker">Francophonie</span></p>
-      <h1>Récupérez <span class="hl">15 heures par semaine</span> sur votre prospection BtoB.</h1>
-      <p class="lead">Les équipes commerciales automatisent, envoient les mêmes séquences à tout le monde et attendent des réponses qui ne viennent plus. Moi, j'appelle. Vraiment. Approche personnalisée, vraie conversation, et 3 à 6 rendez&#8209;vous qualifiés par jour dans votre agenda.</p>
-      <div class="hero__cta">
-        <a class="btn btn--primary" href="https://app.iclosed.io/e/florianconsulting/strategy-call" target="_blank" rel="noopener">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
-          Réserver un appel
-        </a>
-        <a class="btn btn--ghost" href="https://www.linkedin.com/in/florianpenez/" target="_blank" rel="noopener">
-          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5zM3 9h4v12H3zM9 9h3.8v1.7h.05c.53-1 1.83-2.05 3.77-2.05C20.6 8.65 22 10.9 22 14.3V21h-4v-5.9c0-1.4-.02-3.2-1.95-3.2-1.96 0-2.26 1.53-2.26 3.1V21H9z"/></svg>
-          Mon profil LinkedIn
-        </a>
+      <div class="hero__grid">
+        <div class="hero__copy">
+          <p class="eyebrow">SDR Senior · Closer · Setter BtoB · <span class="kicker">Francophonie</span></p>
+          <h1>Récupérez <span class="hl">15 heures par semaine</span> sur votre prospection BtoB.</h1>
+          <p class="lead">Les équipes commerciales automatisent, envoient les mêmes séquences à tout le monde et attendent des réponses qui ne viennent plus. Moi, j'appelle. Vraiment. Approche personnalisée, vraie conversation, et 3 à 6 rendez&#8209;vous qualifiés par jour dans votre agenda.</p>
+          <div class="hero__cta">
+            <a class="btn btn--primary" href="https://app.iclosed.io/e/florianconsulting/strategy-call" target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
+              Réserver un appel
+            </a>
+            <a class="btn btn--ghost" href="https://www.linkedin.com/in/florianpenez/" target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5zM3 9h4v12H3zM9 9h3.8v1.7h.05c.53-1 1.83-2.05 3.77-2.05C20.6 8.65 22 10.9 22 14.3V21h-4v-5.9c0-1.4-.02-3.2-1.95-3.2-1.96 0-2.26 1.53-2.26 3.1V21H9z"/></svg>
+              Mon profil LinkedIn
+            </a>
+          </div>
+        </div>
+        <div class="hero__visual">
+          <a class="ring-widget" id="ringWidget" href="tel:+33627741807" aria-label="Appeler Florian directement, sans détour">
+            <span class="ring-widget__pulse" aria-hidden="true"></span>
+            <span class="ring-widget__pulse ring-widget__pulse--2" aria-hidden="true"></span>
+            <svg class="ring-widget__icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M6.6 10.8c1.4 2.8 3.8 5.2 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1C10.6 21 3 13.4 3 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1L6.6 10.8z"/></svg>
+            <span class="ring-widget__label">Décrochez, ça sonne pour de vrai</span>
+          </a>
+        </div>
       </div>
       <dl class="hero__stats" aria-label="Chiffres clés">
         <div class="hstat"><dd class="hstat__v">1 300+</dd><dt class="hstat__l">Appels / mois</dt></div>
@@ -923,5 +957,50 @@ footer { border-top: 1px solid var(--line); padding-block: 2.2rem; }
   }
   if (reduce) { t = 3.2; draw(); cancelAnimationFrame(raf); } else { draw(); }
 })();
-</script></body>
+</script>
+
+<script>
+(function () {
+  var btn = document.getElementById('ringWidget');
+  if (!btn) return;
+
+  var Ctx = window.AudioContext || window.webkitAudioContext;
+  var ctx;
+
+  function beep() {
+    if (!Ctx) return;
+    try {
+      if (!ctx) ctx = new Ctx();
+      if (ctx.state === 'suspended') ctx.resume();
+      var now = ctx.currentTime;
+      [{ f: 950, t: 0, d: 0.11 }, { f: 1400, t: 0.13, d: 0.11 }].forEach(function (tone) {
+        var osc = ctx.createOscillator();
+        var gain = ctx.createGain();
+        osc.type = 'sine';
+        osc.frequency.value = tone.f;
+        gain.gain.setValueAtTime(0.0001, now + tone.t);
+        gain.gain.exponentialRampToValueAtTime(0.16, now + tone.t + 0.008);
+        gain.gain.exponentialRampToValueAtTime(0.0001, now + tone.t + tone.d);
+        osc.connect(gain).connect(ctx.destination);
+        osc.start(now + tone.t);
+        osc.stop(now + tone.t + tone.d + 0.02);
+      });
+    } catch (e) {}
+  }
+
+  var last = 0;
+  function ring() {
+    var now = Date.now();
+    if (now - last < 900) return;
+    last = now;
+    beep();
+  }
+
+  btn.addEventListener('pointerenter', ring);
+  btn.addEventListener('focus', ring);
+  btn.addEventListener('click', ring);
+})();
+
+</script>
+</body>
 </html>
