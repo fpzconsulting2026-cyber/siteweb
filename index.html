@@ -113,6 +113,10 @@ a { color: inherit; text-decoration: none; }
 .sec-head { display: grid; gap: 0.9rem; max-width: 66ch; margin-bottom: 2.8rem; }
 .sec-head .num { font-family: var(--mono); font-size: var(--s--1); letter-spacing: 0.04em; color: var(--brass); }
 .sec-head h2 { font-size: var(--s-3); }
+.sec-head--wide { max-width: none; }
+.h2--line { font-size: var(--s-2) !important; }
+.h2--line--sm { font-size: var(--s-1) !important; }
+.sec-head--wide .lead { max-width: none; }
 
 /* Constat */
 .constat { display: grid; grid-template-columns: 1fr; gap: 2.4rem; align-items: start; }
@@ -199,7 +203,7 @@ a { color: inherit; text-decoration: none; }
 /* Process */
 .steps { display: grid; border-top: 1px solid var(--line); }
 .step { display: grid; grid-template-columns: auto 1fr; gap: 0.8rem 1.4rem; align-items: start; padding-block: 1.6rem; border-bottom: 1px solid var(--line); }
-@media (min-width: 720px) { .step { grid-template-columns: 4rem 14rem 1fr; gap: 2.4rem; align-items: baseline; } }
+@media (min-width: 720px) { .step { grid-template-columns: 4rem 24rem 1fr; gap: 2.4rem; align-items: baseline; } }
 .step__n { font-family: var(--mono); color: var(--blue); font-size: var(--s-1); }
 .step h3 { font-size: var(--s-2); }
 .step p { color: var(--muted); }
@@ -665,7 +669,7 @@ img.testi__avatar { object-fit: cover; }
       <div class="sec-head reveal">
         <p class="num">03 · Le bon moment pour appeler</p>
         <h2>Le timing change le taux de connexion. La préparation change le résultat.</h2>
-        <p class="lead">D'après mes campagnes, certains créneaux connectent nettement mieux que d'autres. Un bon calendrier d'appel aide, mais il ne remplace jamais un SalesBook mal calibré.</p>
+        <p class="lead">Lors de mes séquences et campagnes de prospection multicanales, un lien calendrier doit rester visible et opérable en un clic. Je m'appuie sur les verbatims et recommandations du SalesBook pour garder la répétition du geste&nbsp;: CRM à jour, relances précises, objections du cold call travaillées, et un maximum de retour d'expérience dans le cycle de vente.</p>
       </div>
       <div class="cal-wrap reveal">
         <div class="cal" id="calGrid" role="img" aria-label="Créneaux d'appel les plus efficaces sur une semaine type"></div>
@@ -675,15 +679,15 @@ img.testi__avatar { object-fit: cover; }
           <span><i class="cal-dot cal-dot--low" aria-hidden="true"></i> Créneau à éviter</span>
         </div>
       </div>
-      <p class="flow__callout reveal">Mais un créneau parfait sur un ciblage flou ne produit rien. Chaque mission démarre par <a href="#methode">14 étapes de calibration stratégique</a>, que vous prépariez un lancement <strong>GTM</strong> ou visiez <strong>+20% de leads par trimestre</strong>.</p>
+      <p class="flow__callout reveal">Mais un créneau parfait sur un ciblage flou ne produit rien. Chaque mission démarre par <a href="#methode">un calibrage stratégique</a>, que vous prépariez un lancement <strong>GTM</strong> ou visiez <strong>+20% de leads par trimestre</strong>.</p>
     </div>
   </section>
 
   <section class="band band--surface" id="methode">
     <div class="wrap">
-      <div class="sec-head reveal">
+      <div class="sec-head sec-head--wide reveal">
         <p class="num">04 · La méthode</p>
-        <h2>Je ne passe pas juste des appels. Je construis votre SalesBook.</h2>
+        <h2 class="h2--line">Je ne passe pas juste des appels. Je construis votre SalesBook.</h2>
         <p class="lead">Une sales stratégie en 3 grandes étapes, détaillée en 14 parties.</p>
       </div>
 
@@ -706,7 +710,7 @@ img.testi__avatar { object-fit: cover; }
       <div class="index" role="list">
         <div class="index__item reveal" role="listitem"><span class="index__n">04</span><div><span class="index__t">Discovery commercial</span><span class="index__d">Plus de 45 questions d'écoute active structurées par thème.</span></div></div>
         <div class="index__item reveal" role="listitem"><span class="index__n">05</span><div><span class="index__t">Qualification MEDDICC / BANT</span><span class="index__d">Chaque opportunité notée, chaque décideur cartographié.</span></div></div>
-        <div class="index__item reveal" role="listitem"><span class="index__n">06</span><div><span class="index__t">Battlecards sectorielles</span><span class="index__d">Cas d'usage prêts à l'emploi par secteur.</span></div></div>
+        <div class="index__item reveal" role="listitem"><span class="index__n">06</span><div><span class="index__t">Battlecards sectorielles</span><span class="index__d">Cas d'usage et objections prêts à l'emploi par secteur.</span></div></div>
         <div class="index__item reveal" role="listitem"><span class="index__n">07</span><div><span class="index__t">Battlecards concurrentielles</span><span class="index__d">Face aux alternatives, les angles qui font gagner.</span></div></div>
         <div class="index__item reveal" role="listitem"><span class="index__n">08</span><div><span class="index__t">Script de démonstration</span><span class="index__d">Le rendez&#8209;vous cadré, minute par minute.</span></div></div>
         <div class="index__item reveal" role="listitem"><span class="index__n">09</span><div><span class="index__t">Calculateur de ROI</span><span class="index__d">Le business case chiffré qui déclenche l'arbitrage.</span></div></div>
@@ -750,7 +754,7 @@ img.testi__avatar { object-fit: cover; }
         <article class="card reveal">
           <span class="card__tag">Pilier 03</span>
           <h3>Coaching d'approche</h3>
-          <p>Le savoir&#8209;faire transmis à votre équipe pour que la performance reste, même après moi.</p>
+          <p>Le savoir&#8209;faire transmis à votre équipe pour que la performance reste, même après mon intervention au sein de votre équipe commerciale.</p>
           <ul><li>Posture &amp; gestion du refus</li><li>Écoute d'appels &amp; feedback</li><li>Montée en compétence des SDR</li></ul>
         </article>
       </div>
@@ -759,26 +763,26 @@ img.testi__avatar { object-fit: cover; }
 
   <section class="band band--surface" id="process">
     <div class="wrap">
-      <div class="sec-head reveal">
+      <div class="sec-head sec-head--wide reveal">
         <p class="num">06 · Le déroulé</p>
-        <h2>De la liste froide au rendez&#8209;vous</h2>
+        <h2 class="h2--line">De la liste froide au rendez&#8209;vous</h2>
       </div>
       <div class="steps">
         <div class="step reveal"><span class="step__n">01</span><h3>Cadrage</h3><p>On aligne l'offre, l'ICP et l'objectif. Je comprends ce que vous vendez et à qui, avant tout.</p></div>
         <div class="step reveal"><span class="step__n">02</span><h3>Ciblage &amp; listes</h3><p>Construction et enrichissement des fichiers de prospects réellement adressables.</p></div>
         <div class="step reveal"><span class="step__n">03</span><h3>SalesBook</h3><p>Rédaction de l'argumentaire, du discovery, du MEDDICC et des objections, testés en réel.</p></div>
-        <div class="step reveal"><span class="step__n">04</span><h3>Cold calling</h3><p>Appels au dialer, en volume et avec méthode. J'ouvre, je qualifie, je décroche le rendez&#8209;vous.</p></div>
-        <div class="step reveal"><span class="step__n">05</span><h3>RDV &amp; itération</h3><p>RDV qualifiés transmis à vos closers, reporting clair, ajustement continu du discours.</p></div>
+        <div class="step reveal"><span class="step__n">04</span><h3>Cold calling</h3><p>Appels avec ou sans dialer selon le métier et le persona à appeler (personnalisation selon l'ICP). J'ouvre, je qualifie, je décroche le rendez&#8209;vous.</p></div>
+        <div class="step reveal"><span class="step__n">05</span><h3>RDV(s) et itération(s)</h3><p>RDV qualifiés transmis à vos closers&nbsp;: analyse chiffrée, rapport de session d'appels à froid, verbatims &amp; coach IA SDR.</p></div>
       </div>
     </div>
   </section>
 
   <section class="band" id="pourquoi">
     <div class="wrap">
-      <div class="sec-head reveal">
+      <div class="sec-head sec-head--wide reveal">
         <p class="num">07 · Pourquoi moi</p>
-        <h2>Ni agence, ni marketplace. Un expert, en direct.</h2>
-        <p class="lead">Trois façons d'externaliser votre prospection. Une seule vous met un SDR senior au bout du fil, sans marge d'intermédiaire.</p>
+        <h2 class="h2--line--sm">Ni agence, ni marketplace&nbsp;: un expert sales, en direct au service de votre génération de leads.</h2>
+        <p class="lead">Trois façons d'externaliser votre prospection. Une seule vous met un SDR senior au bout du fil, sans intermédiaire.</p>
       </div>
       <div class="compare reveal">
         <div class="compare__scroll">
@@ -807,9 +811,9 @@ img.testi__avatar { object-fit: cover; }
 
   <section class="band band--surface" id="pipeline">
     <div class="wrap">
-      <div class="sec-head reveal">
+      <div class="sec-head sec-head--wide reveal">
         <p class="num">08 · Votre pipeline, en un coup d'œil</p>
-        <h2>De quoi piloter votre pipe commercial en moins d'une heure par semaine.</h2>
+        <h2 class="h2--line">De quoi piloter votre pipe commercial en moins d'une heure par semaine.</h2>
         <p class="lead">Chaque prospect appelé est catégorisé, taggé et suivi. Vous ouvrez le board, vous voyez où ça bloque, et vous savez quel discours de closing adopter, colonne par colonne.</p>
       </div>
       <div class="crm reveal">
@@ -852,10 +856,10 @@ img.testi__avatar { object-fit: cover; }
 
   <section class="band" id="outils">
     <div class="wrap">
-      <div class="sec-head reveal">
+      <div class="sec-head sec-head--wide reveal">
         <p class="num">09 · La boîte à outils</p>
-        <h2>Équipé pour le volume et la précision</h2>
-        <p class="lead">Le cold calling moderne s'appuie sur des outils. Dialer, sourcing, enrichissement, suivi : tout est instrumenté.</p>
+        <h2 class="h2--line">Équipé pour le volume et la précision</h2>
+        <p class="lead">Le cold calling moderne s'appuie sur des outils précis&nbsp;: dialer, sourcing, enrichissement de contacts, suivi via CRM, rapports chiffrés. Tout est instrumenté pour mesurer la performance de génération d'opportunités commerciales BtoB.</p>
       </div>
       <div class="tools">
         <div class="tool reveal"><span class="tool__k">Appels</span><span class="tool__v">Dialer</span><p>Cadence élevée, journalisation et suivi automatique.</p></div>
