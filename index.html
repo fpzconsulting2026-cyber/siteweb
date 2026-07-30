@@ -167,6 +167,12 @@ a { color: inherit; text-decoration: none; }
 .method-intro { font-family: var(--display); font-weight: 800; font-size: var(--s-2); line-height: 1.16; letter-spacing: -0.025em; max-width: 24ch; }
 .method-intro .hl { color: var(--blue-soft); }
 .index { display: grid; grid-template-columns: 1fr; margin-top: 2.4rem; border-top: 1px solid var(--line); }
+.phase { margin-top: 3rem; display: flex; align-items: baseline; gap: 1rem; flex-wrap: wrap; }
+.phase:first-of-type { margin-top: 2.4rem; }
+.phase__n { font-family: var(--mono); font-size: var(--s--1); color: var(--brass); text-transform: uppercase; letter-spacing: 0.06em; }
+.phase__t { margin: 0; font-family: var(--display); font-weight: 800; font-size: var(--s-2); letter-spacing: -0.01em; }
+.phase__d { width: 100%; margin: 0.35rem 0 0; font-size: var(--s--1); color: var(--muted); }
+.phase + .index { margin-top: 1.2rem; }
 @media (min-width: 780px) { .index { grid-template-columns: 1fr 1fr; column-gap: 3.4rem; } }
 .index__item { display: grid; grid-template-columns: auto 1fr; align-items: baseline; gap: 1.1rem; padding-block: 1.5rem; border-bottom: 1px solid var(--line); transition: color .2s; }
 .index__item:hover { color: var(--blue-soft); }
@@ -678,19 +684,41 @@ img.testi__avatar { object-fit: cover; }
       <div class="sec-head reveal">
         <p class="num">04 · La méthode</p>
         <h2>Je ne passe pas juste des appels. Je construis votre SalesBook.</h2>
-        <p class="lead">Chaque mission démarre par un manuel commercial opérationnel, en 14 parties.</p>
+        <p class="lead">Une sales stratégie en 3 grandes étapes, détaillée en 14 parties.</p>
+      </div>
+
+      <div class="phase reveal">
+        <span class="phase__n">Étape 1</span>
+        <h3 class="phase__t">Comprendre &amp; cibler</h3>
+        <p class="phase__d">On définit le marché, les cibles et l'angle d'attaque.</p>
       </div>
       <div class="index" role="list">
         <div class="index__item reveal" role="listitem"><span class="index__n">01</span><div><span class="index__t">Le marché &amp; « pourquoi maintenant »</span><span class="index__d">Vision, problèmes qui coûtent de l'argent, fenêtre d'opportunité.</span></div></div>
         <div class="index__item reveal" role="listitem"><span class="index__n">02</span><div><span class="index__t">Client idéal (ICP) &amp; personas</span><span class="index__d">Segments prioritaires, niveaux de décision, langage par persona.</span></div></div>
-        <div class="index__item reveal" role="listitem"><span class="index__n">03</span><div><span class="index__t">Discovery commercial</span><span class="index__d">Plus de 45 questions d'écoute active structurées par thème.</span></div></div>
-        <div class="index__item reveal" role="listitem"><span class="index__n">04</span><div><span class="index__t">Qualification MEDDICC / BANT</span><span class="index__d">Chaque opportunité notée, chaque décideur cartographié.</span></div></div>
-        <div class="index__item reveal" role="listitem"><span class="index__n">05</span><div><span class="index__t">Positionnement &amp; différenciation</span><span class="index__d">Vendre la valeur et la preuve, jamais la fonctionnalité.</span></div></div>
+        <div class="index__item reveal" role="listitem"><span class="index__n">03</span><div><span class="index__t">Positionnement &amp; différenciation</span><span class="index__d">Vendre la valeur et la preuve, jamais la fonctionnalité.</span></div></div>
+      </div>
+
+      <div class="phase reveal">
+        <span class="phase__n">Étape 2</span>
+        <h3 class="phase__t">Armer le discours</h3>
+        <p class="phase__d">Tout ce qu'il faut pour tenir la conversation et prouver la valeur.</p>
+      </div>
+      <div class="index" role="list">
+        <div class="index__item reveal" role="listitem"><span class="index__n">04</span><div><span class="index__t">Discovery commercial</span><span class="index__d">Plus de 45 questions d'écoute active structurées par thème.</span></div></div>
+        <div class="index__item reveal" role="listitem"><span class="index__n">05</span><div><span class="index__t">Qualification MEDDICC / BANT</span><span class="index__d">Chaque opportunité notée, chaque décideur cartographié.</span></div></div>
         <div class="index__item reveal" role="listitem"><span class="index__n">06</span><div><span class="index__t">Battlecards sectorielles</span><span class="index__d">Cas d'usage prêts à l'emploi par secteur.</span></div></div>
         <div class="index__item reveal" role="listitem"><span class="index__n">07</span><div><span class="index__t">Battlecards concurrentielles</span><span class="index__d">Face aux alternatives, les angles qui font gagner.</span></div></div>
         <div class="index__item reveal" role="listitem"><span class="index__n">08</span><div><span class="index__t">Script de démonstration</span><span class="index__d">Le rendez&#8209;vous cadré, minute par minute.</span></div></div>
         <div class="index__item reveal" role="listitem"><span class="index__n">09</span><div><span class="index__t">Calculateur de ROI</span><span class="index__d">Le business case chiffré qui déclenche l'arbitrage.</span></div></div>
         <div class="index__item reveal" role="listitem"><span class="index__n">10</span><div><span class="index__t">Bibliothèque d'objections</span><span class="index__d">Chaque objection traitée par catégorie, réponse prête.</span></div></div>
+      </div>
+
+      <div class="phase reveal">
+        <span class="phase__n">Étape 3</span>
+        <h3 class="phase__t">Exécuter &amp; convertir</h3>
+        <p class="phase__d">Les playbooks pour appeler, relancer et transformer.</p>
+      </div>
+      <div class="index" role="list">
         <div class="index__item reveal" role="listitem"><span class="index__n">11</span><div><span class="index__t">Signaux d'achat &amp; scoring</span><span class="index__d">Matrice de priorisation et relance grand compte.</span></div></div>
         <div class="index__item reveal" role="listitem"><span class="index__n">12</span><div><span class="index__t">Playbook SDR &amp; cadence multicanale</span><span class="index__d">Cold call, voicemail, email, LinkedIn, jour par jour.</span></div></div>
         <div class="index__item reveal" role="listitem"><span class="index__n">13</span><div><span class="index__t">Playbook AE &amp; cycle de vente</span><span class="index__d">Chaque étape du cycle, jusqu'à la passation propre.</span></div></div>
