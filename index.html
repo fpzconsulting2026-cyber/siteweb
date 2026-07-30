@@ -177,6 +177,28 @@ a { color: inherit; text-decoration: none; }
 .phase__t { margin: 0; font-family: var(--display); font-weight: 800; font-size: var(--s-2); letter-spacing: -0.01em; }
 .phase__d { width: 100%; margin: 0.35rem 0 0; font-size: var(--s--1); color: var(--muted); }
 .phase + .index { margin-top: 1.2rem; }
+/* Method carousel */
+.mcar { margin-top: 2.2rem; }
+.mcar__tabs { display: grid; grid-template-columns: 1fr; gap: 0.6rem; margin-bottom: 1.4rem; }
+@media (min-width: 720px) { .mcar__tabs { grid-template-columns: repeat(3, 1fr); } }
+.mcar__tab { display: grid; gap: 0.2rem; text-align: left; padding: 0.85rem 1rem; background: transparent; border: 1px solid var(--line); border-radius: 8px; cursor: pointer; font: inherit; color: inherit; transition: border-color .2s, background .2s; }
+.mcar__tab:hover { border-color: var(--blue); }
+.mcar__tab.is-on { background: var(--surface); border-color: var(--blue); }
+.mcar__tab-n { font-family: var(--mono); font-size: var(--s--1); color: var(--brass); text-transform: uppercase; letter-spacing: 0.06em; }
+.mcar__tab-t { font-family: var(--display); font-weight: 700; font-size: var(--s-0); }
+.mcar__stage { border: 1px solid var(--line); border-radius: 10px; background: var(--surface); padding: 2rem 1.6rem 1.6rem; }
+.mcar__card { display: grid; gap: 0.5rem; min-height: 9.5rem; align-content: start; }
+.mcar__step { font-family: var(--mono); font-size: var(--s--1); color: var(--brass); text-transform: uppercase; letter-spacing: 0.06em; }
+.mcar__num { font-family: var(--mono); font-size: var(--s-3); color: var(--blue); line-height: 1; }
+.mcar__title { margin: 0; font-family: var(--display); font-weight: 800; font-size: var(--s-2); }
+.mcar__desc { margin: 0; font-size: var(--s-0); color: var(--muted); max-width: 52ch; }
+.mcar__nav { display: flex; align-items: center; gap: 1rem; margin-top: 1.4rem; }
+.mcar__arrow { width: 44px; height: 44px; border-radius: 50%; border: 1px solid var(--line); background: transparent; font-size: 1.15rem; color: inherit; cursor: pointer; transition: border-color .2s, background .2s, color .2s; }
+.mcar__arrow:hover { background: var(--blue); border-color: var(--blue); color: #fff; }
+.mcar__count { font-family: var(--mono); font-size: var(--s--1); color: var(--muted); min-width: 5ch; text-align: center; }
+.mcar__dots { display: flex; gap: 0.35rem; margin-top: 1rem; flex-wrap: wrap; }
+.mcar__dot { width: 8px; height: 8px; border-radius: 50%; background: var(--line); transition: background .2s, transform .2s; }
+.mcar__dot.is-on { background: var(--blue); transform: scale(1.25); }
 @media (min-width: 780px) { .index { grid-template-columns: 1fr 1fr; column-gap: 3.4rem; } }
 .index__item { display: grid; grid-template-columns: auto 1fr; align-items: baseline; gap: 1.1rem; padding-block: 1.5rem; border-bottom: 1px solid var(--line); transition: color .2s; }
 .index__item:hover { color: var(--blue-soft); }
@@ -691,42 +713,26 @@ img.testi__avatar { object-fit: cover; }
         <p class="lead">Une sales stratégie en 3 grandes étapes, détaillée en 14 parties.</p>
       </div>
 
-      <div class="phase reveal">
-        <span class="phase__n">Étape 1</span>
-        <h3 class="phase__t">Comprendre &amp; cibler</h3>
-        <p class="phase__d">On définit le marché, les cibles et l'angle d'attaque.</p>
-      </div>
-      <div class="index" role="list">
-        <div class="index__item reveal" role="listitem"><span class="index__n">01</span><div><span class="index__t">Le marché &amp; « pourquoi maintenant »</span><span class="index__d">Vision, problèmes qui coûtent de l'argent, fenêtre d'opportunité.</span></div></div>
-        <div class="index__item reveal" role="listitem"><span class="index__n">02</span><div><span class="index__t">Client idéal (ICP) &amp; personas</span><span class="index__d">Segments prioritaires, niveaux de décision, langage par persona.</span></div></div>
-        <div class="index__item reveal" role="listitem"><span class="index__n">03</span><div><span class="index__t">Positionnement &amp; différenciation</span><span class="index__d">Vendre la valeur et la preuve, jamais la fonctionnalité.</span></div></div>
-      </div>
-
-      <div class="phase reveal">
-        <span class="phase__n">Étape 2</span>
-        <h3 class="phase__t">Armer le discours</h3>
-        <p class="phase__d">Tout ce qu'il faut pour tenir la conversation et prouver la valeur.</p>
-      </div>
-      <div class="index" role="list">
-        <div class="index__item reveal" role="listitem"><span class="index__n">04</span><div><span class="index__t">Discovery commercial</span><span class="index__d">Plus de 45 questions d'écoute active structurées par thème.</span></div></div>
-        <div class="index__item reveal" role="listitem"><span class="index__n">05</span><div><span class="index__t">Qualification MEDDICC / BANT</span><span class="index__d">Chaque opportunité notée, chaque décideur cartographié.</span></div></div>
-        <div class="index__item reveal" role="listitem"><span class="index__n">06</span><div><span class="index__t">Battlecards sectorielles</span><span class="index__d">Cas d'usage et objections prêts à l'emploi par secteur.</span></div></div>
-        <div class="index__item reveal" role="listitem"><span class="index__n">07</span><div><span class="index__t">Battlecards concurrentielles</span><span class="index__d">Face aux alternatives, les angles qui font gagner.</span></div></div>
-        <div class="index__item reveal" role="listitem"><span class="index__n">08</span><div><span class="index__t">Script de démonstration</span><span class="index__d">Le rendez&#8209;vous cadré, minute par minute.</span></div></div>
-        <div class="index__item reveal" role="listitem"><span class="index__n">09</span><div><span class="index__t">Calculateur de ROI</span><span class="index__d">Le business case chiffré qui déclenche l'arbitrage.</span></div></div>
-        <div class="index__item reveal" role="listitem"><span class="index__n">10</span><div><span class="index__t">Bibliothèque d'objections</span><span class="index__d">Chaque objection traitée par catégorie, réponse prête.</span></div></div>
-      </div>
-
-      <div class="phase reveal">
-        <span class="phase__n">Étape 3</span>
-        <h3 class="phase__t">Exécuter &amp; convertir</h3>
-        <p class="phase__d">Les playbooks pour appeler, relancer et transformer.</p>
-      </div>
-      <div class="index" role="list">
-        <div class="index__item reveal" role="listitem"><span class="index__n">11</span><div><span class="index__t">Signaux d'achat &amp; scoring</span><span class="index__d">Matrice de priorisation et relance grand compte.</span></div></div>
-        <div class="index__item reveal" role="listitem"><span class="index__n">12</span><div><span class="index__t">Playbook SDR &amp; cadence multicanale</span><span class="index__d">Cold call, voicemail, email, LinkedIn, jour par jour.</span></div></div>
-        <div class="index__item reveal" role="listitem"><span class="index__n">13</span><div><span class="index__t">Playbook AE &amp; cycle de vente</span><span class="index__d">Chaque étape du cycle, jusqu'à la passation propre.</span></div></div>
-        <div class="index__item reveal" role="listitem"><span class="index__n">14</span><div><span class="index__t">Preuves &amp; cas clients</span><span class="index__d">Bibliothèque de preuves et reporting mesurable.</span></div></div>
+      <div class="mcar reveal">
+        <div class="mcar__tabs" role="tablist" aria-label="Les 3 grandes étapes">
+          <button class="mcar__tab" type="button" data-jump="0"><span class="mcar__tab-n">Étape 1</span><span class="mcar__tab-t">Comprendre &amp; cibler</span></button>
+          <button class="mcar__tab" type="button" data-jump="3"><span class="mcar__tab-n">Étape 2</span><span class="mcar__tab-t">Armer le discours</span></button>
+          <button class="mcar__tab" type="button" data-jump="10"><span class="mcar__tab-n">Étape 3</span><span class="mcar__tab-t">Exécuter &amp; convertir</span></button>
+        </div>
+        <div class="mcar__stage">
+          <div class="mcar__card" id="mcarCard" aria-live="polite">
+            <span class="mcar__step" id="mcarStep"></span>
+            <span class="mcar__num" id="mcarNum"></span>
+            <h3 class="mcar__title" id="mcarTitle"></h3>
+            <p class="mcar__desc" id="mcarDesc"></p>
+          </div>
+          <div class="mcar__nav">
+            <button class="mcar__arrow" type="button" id="mcarPrev" aria-label="Partie précédente">&#8592;</button>
+            <span class="mcar__count" id="mcarCount"></span>
+            <button class="mcar__arrow" type="button" id="mcarNext" aria-label="Partie suivante">&#8594;</button>
+          </div>
+          <div class="mcar__dots" id="mcarDots" aria-hidden="true"></div>
+        </div>
       </div>
     </div>
   </section>
@@ -1019,6 +1025,55 @@ img.testi__avatar { object-fit: cover; }
     t += 0.018; raf = requestAnimationFrame(draw);
   }
   if (reduce) { t = 3.2; draw(); cancelAnimationFrame(raf); } else { draw(); }
+})();
+</script>
+
+<script>
+(function () {
+  var items = [
+    { step: 'Étape 1 · Comprendre & cibler', n: '01', t: 'Le marché & « pourquoi maintenant »', d: "Vision, problèmes qui coûtent de l'argent, fenêtre d'opportunité." },
+    { step: 'Étape 1 · Comprendre & cibler', n: '02', t: 'Client idéal (ICP) & personas', d: 'Segments prioritaires, niveaux de décision, langage par persona.' },
+    { step: 'Étape 1 · Comprendre & cibler', n: '03', t: 'Positionnement & différenciation', d: 'Vendre la valeur et la preuve, jamais la fonctionnalité.' },
+    { step: 'Étape 2 · Armer le discours', n: '04', t: 'Discovery commercial', d: "Plus de 45 questions d'écoute active structurées par thème." },
+    { step: 'Étape 2 · Armer le discours', n: '05', t: 'Qualification MEDDICC / BANT', d: 'Chaque opportunité notée, chaque décideur cartographié.' },
+    { step: 'Étape 2 · Armer le discours', n: '06', t: 'Battlecards sectorielles', d: "Cas d'usage et objections prêts à l'emploi par secteur." },
+    { step: 'Étape 2 · Armer le discours', n: '07', t: 'Battlecards concurrentielles', d: 'Face aux alternatives, les angles qui font gagner.' },
+    { step: 'Étape 2 · Armer le discours', n: '08', t: 'Script de démonstration', d: 'Le rendez‑vous cadré, minute par minute.' },
+    { step: 'Étape 2 · Armer le discours', n: '09', t: 'Calculateur de ROI', d: "Le business case chiffré qui déclenche l'arbitrage." },
+    { step: 'Étape 2 · Armer le discours', n: '10', t: "Bibliothèque d'objections", d: 'Chaque objection traitée par catégorie, réponse prête.' },
+    { step: 'Étape 3 · Exécuter & convertir', n: '11', t: "Signaux d'achat & scoring", d: 'Matrice de priorisation et relance grand compte.' },
+    { step: 'Étape 3 · Exécuter & convertir', n: '12', t: 'Playbook SDR & cadence multicanale', d: 'Cold call, voicemail, email, LinkedIn, jour par jour.' },
+    { step: 'Étape 3 · Exécuter & convertir', n: '13', t: 'Playbook AE & cycle de vente', d: "Chaque étape du cycle, jusqu'à la passation propre." },
+    { step: 'Étape 3 · Exécuter & convertir', n: '14', t: 'Preuves & cas clients', d: 'Bibliothèque de preuves et reporting mesurable.' }
+  ];
+  var card = document.getElementById('mcarCard');
+  if (!card) return;
+  var i = 0;
+  var dotsBox = document.getElementById('mcarDots');
+  items.forEach(function () {
+    var d = document.createElement('span');
+    d.className = 'mcar__dot';
+    dotsBox.appendChild(d);
+  });
+  var dots = dotsBox.children;
+  var tabs = document.querySelectorAll('.mcar__tab');
+  function stepIndex(k) { return k < 3 ? 0 : (k < 10 ? 1 : 2); }
+  function render() {
+    var it = items[i];
+    document.getElementById('mcarStep').textContent = it.step;
+    document.getElementById('mcarNum').textContent = it.n;
+    document.getElementById('mcarTitle').textContent = it.t;
+    document.getElementById('mcarDesc').textContent = it.d;
+    document.getElementById('mcarCount').textContent = it.n + ' / 14';
+    for (var k = 0; k < dots.length; k++) dots[k].classList.toggle('is-on', k === i);
+    tabs.forEach(function (tab, k) { tab.classList.toggle('is-on', k === stepIndex(i)); });
+  }
+  document.getElementById('mcarPrev').addEventListener('click', function () { i = (i + items.length - 1) % items.length; render(); });
+  document.getElementById('mcarNext').addEventListener('click', function () { i = (i + 1) % items.length; render(); });
+  tabs.forEach(function (tab) {
+    tab.addEventListener('click', function () { i = parseInt(tab.getAttribute('data-jump'), 10); render(); });
+  });
+  render();
 })();
 </script>
 
