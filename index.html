@@ -375,6 +375,7 @@ img.testi__avatar { object-fit: cover; }
 .univers-photos{display:grid;grid-template-columns:1fr 1fr;gap:1rem;align-self:start;}
 .univers-photo{width:100%;height:100%;aspect-ratio:3/4;object-fit:cover;border-radius:10px;border:1px solid var(--line);box-shadow:0 20px 40px -26px rgba(20,19,16,.3);display:block;}
 .univers-photo--main{align-self:end;}
+.univers-photo--cartoon{grid-column:1/-1;aspect-ratio:auto;object-fit:contain;background:#fff;padding:12px;}
 
 /* Scroll cue under the hero stats */
 .scroll-cue{display:flex;flex-direction:column;align-items:center;gap:.5rem;margin-top:2.6rem;font-family:var(--mono);font-size:.75rem;letter-spacing:.16em;text-transform:uppercase;color:var(--muted-2);opacity:.75;}
@@ -606,6 +607,7 @@ img.testi__avatar { object-fit: cover; }
       <div class="univers-photos reveal">
         <img class="univers-photo univers-photo--main" src="assets/univers-le-soleil.jpg" alt="La 4L bleue de Florian, « Le soleil », garée dans une ruelle" loading="lazy" width="562" height="1000">
         <img class="univers-photo" src="assets/univers-alpes.jpg" alt="Rallye 4Alpes : des dizaines de Renault 4 alignées sur une route de montagne" loading="lazy" width="750" height="1000">
+        <img class="univers-photo univers-photo--cartoon" src="assets/univers-cold-caller.png" alt="Illustration : Florian au volant de sa 4L « Cold-Caller », téléphone à la main, pouce levé" loading="lazy" width="564" height="456">
       </div>
     </div>
   </section>
