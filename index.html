@@ -255,6 +255,13 @@ footer { border-top: 1px solid var(--line); padding-block: 2.2rem; }
 .testi blockquote { margin: 0; font-family: var(--display); font-weight: 700; font-size: var(--s-1); line-height: 1.35; letter-spacing: -0.01em; color: var(--paper); }
 .testi figcaption { display: flex; align-items: center; gap: 0.8rem; }
 .testi__avatar { width: 40px; height: 40px; border-radius: 50%; background: var(--navy-2); border: 1px solid var(--line); display: grid; place-items: center; font-family: var(--mono); font-size: 0.72rem; color: var(--blue-soft); flex: none; }
+img.testi__avatar { object-fit: cover; }
+.trust-faces { margin-top: 2rem; display: flex; align-items: center; gap: 1.1rem; flex-wrap: wrap; }
+.trust-faces__stack { display: flex; }
+.trust-faces__stack img { width: 52px; height: 52px; border-radius: 50%; object-fit: cover; border: 2px solid var(--navy); box-shadow: 0 0 0 1px var(--line); flex: none; }
+.trust-faces__stack img + img { margin-left: -13px; }
+.trust-faces__label { margin: 0; font-family: var(--mono); font-size: var(--s--1); color: var(--muted); max-width: 44ch; }
+.trust-faces__label strong { color: var(--paper); font-weight: 500; }
 .mut2 { color: var(--muted-2); font-family: var(--mono); font-size: var(--s--1); font-weight: 400; }
 .testi-credit { margin-top: 1.6rem; font-family: var(--mono); font-size: var(--s--1); color: var(--muted); }
 .testi-credit strong { color: var(--paper); }
@@ -511,7 +518,7 @@ footer { border-top: 1px solid var(--line); padding-block: 2.2rem; }
         <div class="compare">
           <div class="compare__scroll">
             <table>
-              <thead><tr><th scope="col">Semaine</th><th scope="col">Appels</th><th scope="col">Connectés</th><th scope="col">Taux</th><th scope="col">RDV posés</th></tr></thead>
+              <thead><tr><th scope="col">Session d'appels à froid /semaine</th><th scope="col">Appels</th><th scope="col">Connectés</th><th scope="col">Taux</th><th scope="col">RDV posés</th></tr></thead>
               <tbody>
                 <tr><td>25 – 31 mai</td><td>710</td><td>237</td><td class="me">33,4%</td><td class="me">23</td></tr>
                 <tr><td>27 avr – 1 mai</td><td>661</td><td>146</td><td class="mut">22,1%</td><td class="mut">7</td></tr>
@@ -534,17 +541,27 @@ footer { border-top: 1px solid var(--line); padding-block: 2.2rem; }
         <figure class="testi reveal">
           <blockquote>« J'ai eu le plaisir de travailler avec Florian sur des campagnes de cold call et la mise en place de nouveaux outils pour optimiser l'impact de ces appels. Il a partagé ses retours sur ces différentes plateformes et les optimisations possibles. »</blockquote>
           <figcaption>
-            <span class="testi__avatar" aria-hidden="true">ND</span>
+            <img class="testi__avatar" src="assets/temoin-noemie-danto.jpg" alt="" width="40" height="40" loading="lazy">
             <span><strong>Noémie Danto</strong><br><span class="mut2">Cliente depuis juin 2026</span></span>
           </figcaption>
         </figure>
         <figure class="testi reveal">
           <blockquote>« J'ai fait appel à Florian pour des missions de prospection téléphonique et prise de RDV. Tout s'est bien passé&nbsp;: il a su être opérationnel dès le premier jour, avec plusieurs rendez&#8209;vous qualifiés par jour, de manière régulière au fil des missions. »</blockquote>
           <figcaption>
-            <span class="testi__avatar" aria-hidden="true">AB</span>
+            <img class="testi__avatar" src="assets/temoin-adrien-bono.jpg" alt="" width="40" height="40" loading="lazy">
             <span><strong>Adrien Bono</strong><br><span class="mut2">GTM &amp; Data Expert · client depuis mai 2026</span></span>
           </figcaption>
         </figure>
+      </div>
+      <div class="trust-faces reveal">
+        <div class="trust-faces__stack" aria-hidden="true">
+          <img src="assets/temoin-noemie-danto.jpg" alt="" title="Noémie Danto" width="52" height="52" loading="lazy">
+          <img src="assets/temoin-adrien-bono.jpg" alt="" title="Adrien Bono" width="52" height="52" loading="lazy">
+          <img src="assets/temoin-lauren-vu.jpg" alt="" title="Lauren Vu" width="52" height="52" loading="lazy">
+          <img src="assets/temoin-ayoub-ben-younes.jpg" alt="" title="Ayoub Ben Younes" width="52" height="52" loading="lazy">
+          <img src="assets/temoin-sacha-delcourt.jpg" alt="" title="Sacha Delcourt" width="52" height="52" loading="lazy">
+        </div>
+        <p class="trust-faces__label"><strong>Noémie, Adrien, Lauren, Ayoub, Sacha</strong> — interlocuteurs, partenaires et directions commerciales qui me font confiance.</p>
       </div>
       <p class="testi-credit reveal">★ Également recommandé par <strong>Sacha</strong>, fondateur de <a href="https://theagentmovement.fr/" target="_blank" rel="noopener">The Agent Movement</a>, auprès de sa communauté.</p>
     </div>
