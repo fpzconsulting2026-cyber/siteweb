@@ -427,15 +427,13 @@ img.testi__avatar { object-fit: cover; }
 <div class="grain" aria-hidden="true"></div>
 <header class="nav">
   <div class="wrap nav__inner">
-    <a class="brand" href="#top" aria-label="Florian Penez, accueil">
-      <span class="brand__avatar" role="img" aria-label="Florian Penez"></span>
-    </a>
     <nav class="nav__links" aria-label="Navigation principale">
+      <a href="#top">Accueil</a>
       <a href="#resultats">Résultats</a>
       <a href="#univers">Mon univers</a>
       <a href="#methode">Méthode</a>
       <a href="#pipeline">Pipeline</a>
-      <a href="#pourquoi">Pourquoi moi</a>
+      <a href="#pourquoi">Pourquoi moi ?</a>
     </nav>
     <a class="btn btn--primary" href="https://app.iclosed.io/e/florianconsulting/strategy-call" target="_blank" rel="noopener">Réserver un appel</a>
   </div>
@@ -708,7 +706,7 @@ img.testi__avatar { object-fit: cover; }
     <div class="wrap">
       <div class="sec-head sec-head--wide reveal">
         <p class="num">04 · La méthode</p>
-        <h2 class="h2--line--sm">Je ne passe pas juste des appels. Je construis votre SalesBook.</h2>
+        <h2 class="h2--line--sm">Je ne passe pas simplement des appels&nbsp;: je construis votre SalesBook avec du verbatim terrain.</h2>
         <p class="lead">Une sales stratégie en 3 grandes étapes, détaillée en 14 parties.</p>
       </div>
 
@@ -785,7 +783,7 @@ img.testi__avatar { object-fit: cover; }
   <section class="band" id="pourquoi">
     <div class="wrap">
       <div class="sec-head sec-head--wide reveal">
-        <p class="num">07 · Pourquoi moi</p>
+        <p class="num">07 · Pourquoi moi ?</p>
         <h2 class="h2--line--sm">Ni agence, ni marketplace&nbsp;: un expert sales, en direct au service de votre génération de leads.</h2>
         <p class="lead">Trois façons d'externaliser votre prospection. Une seule vous met un SDR senior au bout du fil, sans intermédiaire.</p>
       </div>
@@ -1024,6 +1022,38 @@ img.testi__avatar { object-fit: cover; }
     t += 0.018; raf = requestAnimationFrame(draw);
   }
   if (reduce) { t = 3.2; draw(); cancelAnimationFrame(raf); } else { draw(); }
+})();
+</script>
+
+<script>
+/* Keep the numbered section headings on a single line: shrink until they fit. */
+(function () {
+  var heads = document.querySelectorAll('.h2--line, .h2--line--sm');
+  if (!heads.length) return;
+
+  function fitOne(h) {
+    h.style.removeProperty('white-space');
+    h.style.removeProperty('font-size');
+    var avail = h.parentElement.clientWidth;
+    if (!avail || window.innerWidth < 760) return;
+    h.style.setProperty('white-space', 'nowrap');
+    var size = parseFloat(window.getComputedStyle(h).fontSize);
+    /* The CSS sizes use !important, so the override has to as well. */
+    while (h.scrollWidth > avail && size > 15) {
+      size -= 0.5;
+      h.style.setProperty('font-size', size + 'px', 'important');
+    }
+  }
+
+  function fit() { heads.forEach(fitOne); }
+
+  fit();
+  window.addEventListener('resize', fit);
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(fit);
+  if (window.ResizeObserver) {
+    var ro = new ResizeObserver(function () { fit(); });
+    ro.observe(document.body);
+  }
 })();
 </script>
 
