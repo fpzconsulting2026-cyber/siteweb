@@ -178,6 +178,16 @@ a { color: inherit; text-decoration: none; }
 .phase__d { width: 100%; margin: 0.35rem 0 0; font-size: var(--s--1); color: var(--muted); }
 .phase + .index { margin-top: 1.2rem; }
 /* Method carousel */
+/* Call recordings */
+.calls { display: grid; grid-template-columns: 1fr; gap: 1rem; margin-bottom: 1.1rem; }
+@media (min-width: 900px) { .calls { grid-template-columns: repeat(3, 1fr); } }
+.call { margin: 0; background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 1.3rem 1.2rem 1.1rem; display: grid; gap: 0.9rem; }
+.call figcaption { display: grid; grid-template-columns: auto 1fr auto; align-items: baseline; gap: 0.7rem; }
+.call__n { font-family: var(--mono); font-size: var(--s--1); color: var(--brass); }
+.call__t { font-family: var(--display); font-weight: 700; font-size: var(--s-0); }
+.call__d { font-family: var(--mono); font-size: var(--s--1); color: var(--muted); }
+.call audio { width: 100%; height: 38px; }
+
 .mcar { margin-top: 2.2rem; }
 .mcar__tabs { display: grid; grid-template-columns: 1fr; gap: 0.6rem; margin-bottom: 1.4rem; }
 @media (min-width: 720px) { .mcar__tabs { grid-template-columns: repeat(3, 1fr); } }
@@ -430,6 +440,7 @@ img.testi__avatar { object-fit: cover; }
     <nav class="nav__links" aria-label="Navigation principale">
       <a href="#top">Accueil</a>
       <a href="#resultats">Résultats</a>
+      <a href="#ecoute">Écoutez mes appels</a>
       <a href="#univers">Mon univers</a>
       <a href="#methode">Méthode</a>
       <a href="#pipeline">Pipeline</a>
@@ -564,6 +575,43 @@ img.testi__avatar { object-fit: cover; }
         </div>
         <span class="dash__cap">Extraits réels de mes dialers (Aircall, SkipCall) sur les dernières campagnes.</span>
       </div>
+    </div>
+  </section>
+
+  <section class="band" id="ecoute">
+    <div class="wrap">
+      <div class="sec-head sec-head--wide reveal">
+        <p class="num">01 bis · Écoutez</p>
+        <h2 class="h2--line--sm">Vous n'avez pas à me croire sur parole. Écoutez mes appels.</h2>
+        <p class="lead">Trois appels réels, enregistrés en campagne et anonymisés. La preuve par le résultat.</p>
+      </div>
+      <div class="calls">
+        <figure class="call reveal">
+          <figcaption>
+            <span class="call__n">01</span>
+            <span class="call__t">Appel de prospection</span>
+            <span class="call__d">4 min 21</span>
+          </figcaption>
+          <audio controls preload="none" src="assets/appel-01.mp3">Votre navigateur ne lit pas l'audio.</audio>
+        </figure>
+        <figure class="call reveal">
+          <figcaption>
+            <span class="call__n">02</span>
+            <span class="call__t">Appel de prospection</span>
+            <span class="call__d">10 min 01</span>
+          </figcaption>
+          <audio controls preload="none" src="assets/appel-02.mp3">Votre navigateur ne lit pas l'audio.</audio>
+        </figure>
+        <figure class="call reveal">
+          <figcaption>
+            <span class="call__n">03</span>
+            <span class="call__t">Appel de prospection</span>
+            <span class="call__d">5 min 37</span>
+          </figcaption>
+          <audio controls preload="none" src="assets/appel-03.mp3">Votre navigateur ne lit pas l'audio.</audio>
+        </figure>
+      </div>
+      <span class="dash__cap">Noms, entreprises et coordonnées retirés des enregistrements.</span>
     </div>
   </section>
 
