@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 190 32" width="190" height="32">
+  <defs>
+    <linearGradient id="bb-grad" x1="0.5" x2="0.5" y1="0" y2="1">
+      <stop offset="0" stop-color="rgb(24,86,255)"/>
+      <stop offset="1" stop-color="rgb(9,70,243)"/>
+    </linearGradient>
+  </defs>
+  <g transform="translate(0,0)">
+    <path d="M 0 16 C 0 7.163 7.163 0 16 0 C 24.837 0 32 7.163 32 16 C 32 24.837 24.837 32 16 32 C 7.163 32 0 24.837 0 16 Z" fill="url(#bb-grad)"/>
+    <g transform="translate(6 6)">
+      <path d="M 19.051 9.5 C 20.128 9.5 21 10.389 21 11.487 L 21 14.629 C 21 17.043 19.081 19 16.713 19 L 12.728 19 C 11.651 19 10.779 18.111 10.779 17.013 L 10.779 13.871 C 10.779 11.457 12.698 9.5 15.066 9.5 Z" fill="#fff"/>
+      <path d="M 5.885 9.5 C 8.28 9.5 10.221 11.479 10.221 13.921 L 10.221 17.013 C 10.221 18.111 9.349 19 8.272 19 L 4.287 19 C 1.919 19 0 17.043 0 14.629 L 0 1.987 C 0 0.889 0.872 0 1.949 0 L 8.272 0 C 9.349 0 10.221 0.889 10.221 1.987 L 10.221 5.079 C 10.221 7.521 8.28 9.5 5.885 9.5 Z" fill="#fff"/>
+    </g>
+  </g>
+  <text x="40" y="23" font-family="Helvetica, Arial, sans-serif" font-size="19" font-weight="700" fill="#0A0A0A">Be Bouncy</text>
+</svg>

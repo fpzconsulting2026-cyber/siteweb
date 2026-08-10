@@ -102,9 +102,10 @@ a { color: inherit; text-decoration: none; }
 .marquee__track { display: flex; align-items: center; gap: 3.2rem; width: max-content; animation: scroll-x 32s linear infinite; }
 .marquee:hover .marquee__track { animation-play-state: paused; }
 @keyframes scroll-x { to { transform: translateX(-50%); } }
-.logo { display: inline-flex; align-items: center; gap: 0.5rem; white-space: nowrap; font-family: var(--display); font-weight: 700; font-size: 1.35rem; letter-spacing: -0.01em; color: var(--muted); opacity: 0.7; transition: color .25s, opacity .25s; }
-.logo::before { content: ""; width: 8px; height: 8px; border-radius: 50%; border: 1.5px solid currentColor; flex: none; }
-.logo:hover { color: var(--blue-soft); opacity: 1; }
+.logo { display: inline-flex; align-items: center; height: 34px; flex: none; opacity: 0.6; filter: grayscale(1); transition: opacity .25s, filter .25s; }
+.logo img { height: 100%; width: auto; max-width: 150px; object-fit: contain; display: block; }
+.logo:hover { opacity: 1; filter: grayscale(0); }
+@media (prefers-reduced-motion: reduce) { .logo { transition: none; } }
 @media (prefers-reduced-motion: reduce) { .marquee { overflow-x: auto; } .marquee__track { animation: none; } }
 
 /* Sections */
@@ -227,6 +228,7 @@ footer { border-top: 1px solid var(--line); padding-block: 2.2rem; }
 .foot__links { display: flex; gap: 1.5rem; }
 .foot a { color: var(--muted); font-family: var(--mono); font-size: var(--s--1); letter-spacing: 0.05em; text-transform: uppercase; transition: color .2s; }
 .foot a:hover { color: var(--blue-soft); }
+.foot__tagline { margin: 0 0 1.4rem; font-family: var(--mono); font-size: var(--s--1); letter-spacing: 0.01em; color: var(--muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 
 .reveal { opacity: 0; transform: translateY(16px); transition: opacity .7s ease, transform .7s ease; }
 .reveal.in { opacity: 1; transform: none; }
@@ -443,15 +445,15 @@ footer { border-top: 1px solid var(--line); padding-block: 2.2rem; }
     <p class="proof__label">Ils m'ont confié leur prospection</p>
     <div class="marquee">
       <div class="marquee__track" id="logoTrack">
-        <a class="logo" href="https://voxnow.be/" target="_blank" rel="noopener">Voxnow</a>
-        <a class="logo" href="https://www.kayo.fr/" target="_blank" rel="noopener">Kayo</a>
-        <a class="logo" href="https://www.juwin.fr/" target="_blank" rel="noopener">Juwin</a>
-        <a class="logo" href="https://enso-paris.fr/" target="_blank" rel="noopener">Enso Paris</a>
-        <a class="logo" href="https://cleon1.com/fr/" target="_blank" rel="noopener">Cleon1</a>
-        <a class="logo" href="https://www.bebouncy.com/" target="_blank" rel="noopener">Be Bouncy</a>
-        <a class="logo" href="https://www.mealz.ai/" target="_blank" rel="noopener">Mealz</a>
-        <a class="logo" href="https://theagentmovement.fr/" target="_blank" rel="noopener">The Agent Movement</a>
-        <a class="logo" href="https://www.diskoleads.com/" target="_blank" rel="noopener">Diskoleads</a>
+        <a class="logo" href="https://voxnow.be/" target="_blank" rel="noopener"><img src="assets/logos/voxnow.png" alt="Voxnow" loading="lazy" width="600" height="300"></a>
+        <a class="logo" href="https://www.kayo.fr/" target="_blank" rel="noopener"><img src="assets/logos/kayo.png" alt="Kayo" loading="lazy" width="400" height="178"></a>
+        <a class="logo" href="https://www.juwin.fr/" target="_blank" rel="noopener"><img src="assets/logos/juwin.png" alt="Juwin" loading="lazy" width="300" height="300"></a>
+        <a class="logo" href="https://enso-paris.fr/" target="_blank" rel="noopener"><img src="assets/logos/enso-paris.png" alt="Enso Paris" loading="lazy" width="412" height="195"></a>
+        <a class="logo" href="https://cleon1.com/fr/" target="_blank" rel="noopener"><img src="assets/logos/cleon1.svg" alt="Cleon1" loading="lazy" width="148" height="32"></a>
+        <a class="logo" href="https://www.bebouncy.com/" target="_blank" rel="noopener"><img src="assets/logos/bebouncy.svg" alt="Be Bouncy" loading="lazy" width="190" height="32"></a>
+        <a class="logo" href="https://www.mealz.ai/" target="_blank" rel="noopener"><img src="assets/logos/mealz.svg" alt="Mealz" loading="lazy" width="233" height="43"></a>
+        <a class="logo" href="https://theagentmovement.fr/" target="_blank" rel="noopener"><img src="assets/logos/the-agent-movement.png" alt="The Agent Movement" loading="lazy" width="500" height="333"></a>
+        <a class="logo" href="https://www.diskoleads.com/" target="_blank" rel="noopener"><img src="assets/logos/diskoleads.svg" alt="Diskoleads" loading="lazy" width="1734" height="556"></a>
       </div>
     </div>
     <div class="flags-row" aria-label="Pays d'intervention">
@@ -840,11 +842,14 @@ footer { border-top: 1px solid var(--line); padding-block: 2.2rem; }
 </main>
 
 <footer>
-  <div class="wrap foot">
-    <div class="foot__id"><span class="foot-avatar" role="img" aria-label="Florian Penez"></span><span>© 2026 Florian Penez · FPZ Consulting</span></div>
-    <div class="foot__links">
-      <a href="https://www.linkedin.com/in/florianpenez/" target="_blank" rel="noopener">LinkedIn ↗</a>
-      <a href="mailto:fpzconsulting2026@gmail.com">Email</a>
+  <div class="wrap">
+    <p class="foot__tagline">Un trimestre ou trois mois d'affilée. J'appelle, je qualifie, je vous rends des rendez&#8209;vous.</p>
+    <div class="foot">
+      <div class="foot__id"><span class="foot-avatar" role="img" aria-label="Florian Penez"></span><span>© 2026 Florian Penez · FPZ Consulting</span></div>
+      <div class="foot__links">
+        <a href="https://www.linkedin.com/in/florianpenez/" target="_blank" rel="noopener">LinkedIn ↗</a>
+        <a href="mailto:fpzconsulting2026@gmail.com">Email</a>
+      </div>
     </div>
   </div>
 </footer>
