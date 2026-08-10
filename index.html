@@ -69,7 +69,22 @@ a { color: inherit; text-decoration: none; }
 .btn svg { width: 1.05em; height: 1.05em; }
 
 /* Nav */
-.nav { position: sticky; top: 0; z-index: 30; background: color-mix(in srgb, var(--navy) 86%, transparent); backdrop-filter: blur(16px); border-bottom: 1px solid var(--line-soft); }
+/* Road progress bar with the 4L driving along it */
+body { padding-top: 26px; }
+.road { position: fixed; top: 0; left: 0; right: 0; height: 26px; z-index: 60; pointer-events: none; background: var(--navy); }
+.road__tarmac { position: absolute; left: 0; right: 0; bottom: 0; height: 5px; background: var(--line); }
+.road__done { position: absolute; left: 0; bottom: 0; height: 5px; width: 0; background: var(--blue); }
+.road__dashes { position: absolute; left: 0; right: 0; bottom: 2px; height: 1px; background-image: repeating-linear-gradient(to right, var(--surface) 0 10px, transparent 10px 22px); opacity: .7; }
+.road__car { position: absolute; bottom: 3px; left: 0; width: 34px; height: 22px; transform: translateX(-50%); transition: left .08s linear; }
+.road__car svg { width: 100%; height: 100%; display: block; }
+@media (prefers-reduced-motion: reduce) { .road__car { transition: none; } }
+@media (max-width: 640px) { body { padding-top: 22px; } .road { height: 22px; } .road__car { width: 26px; height: 17px; } }
+
+/* Playful lift on interactive cards */
+.call, .mcar__stage, .testi { transition: transform .25s ease, box-shadow .25s ease; }
+.call:hover, .testi:hover { transform: translateY(-3px); box-shadow: 0 18px 34px -26px rgba(20,19,16,.45); }
+
+.nav { position: sticky; top: 0; z-index: 30; background: color-mix(in srgb,var(--navy) 86%, transparent); backdrop-filter: blur(16px); border-bottom: 1px solid var(--line-soft); }
 .nav__inner { display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding-block: 0.8rem; }
 .brand { display: flex; align-items: center; gap: 0.65rem; }
 .brand__mark { font-family: var(--display); font-weight: 800; font-size: 0.95rem; color: var(--navy); background: var(--blue); border-radius: 4px; padding: 0.3em 0.5em; line-height: 1; }
@@ -210,6 +225,15 @@ a { color: inherit; text-decoration: none; }
 .mcar__arrow:hover { background: var(--blue); border-color: var(--blue); color: #fff; }
 .mcar__count { font-family: var(--mono); font-size: var(--s--1); color: var(--muted); min-width: 5ch; text-align: center; }
 .mcar__dots { display: flex; gap: 0.35rem; margin-top: 1rem; flex-wrap: wrap; }
+/* Progress and unlock feedback on the method carousel */
+.mcar__progress { display: flex; align-items: center; gap: 0.8rem; margin-top: 1rem; }
+.mcar__bar { flex: 1; height: 6px; border-radius: 100px; background: var(--line); overflow: hidden; }
+.mcar__bar span { display: block; height: 100%; width: 0; background: var(--blue); border-radius: 100px; transition: width .35s ease; }
+.mcar__score { font-family: var(--mono); font-size: var(--s--1); color: var(--muted); white-space: nowrap; }
+.mcar__score strong { color: var(--blue); }
+.mcar__done { display: inline-flex; align-items: center; gap: 0.4rem; margin-top: 0.9rem; padding: 0.45em 0.9em; border-radius: 100px; background: var(--blue); color: #fff; font-family: var(--mono); font-size: var(--s--1); opacity: 0; transform: translateY(6px); transition: opacity .3s ease, transform .3s ease; }
+.mcar__done.is-on { opacity: 1; transform: none; }
+.mcar__dot.is-seen { background: var(--blue-soft); }
 .mcar__dot { width: 8px; height: 8px; border-radius: 50%; background: var(--line); transition: background .2s, transform .2s; }
 .mcar__dot.is-on { background: var(--blue); transform: scale(1.25); }
 @media (min-width: 780px) { .index { grid-template-columns: 1fr 1fr; column-gap: 3.4rem; } }
@@ -451,6 +475,19 @@ img.testi__avatar { object-fit: cover; }
 </head>
 <body>
 <div class="grain" aria-hidden="true"></div>
+<div class="road" id="road" aria-hidden="true">
+  <div class="road__tarmac"></div>
+  <div class="road__done" id="roadDone"></div>
+  <div class="road__dashes"></div>
+  <div class="road__car" id="roadCar">
+    <svg viewBox="0 0 68 44" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M6 30h56v-7c0-2-1.4-3.6-3.4-4l-8.2-1.6-6.6-7.2C42.6 8.8 40.8 8 38.9 8H21.4c-2.3 0-4.4 1.3-5.4 3.4L12 19l-4.6 1.2C5.5 20.7 4 22.4 4 24.4V28c0 1.1.9 2 2 2z" fill="var(--blue)"/>
+      <path d="M20 12h8v7h-12l4-7zM31 12h7.2c.9 0 1.8.4 2.4 1.1L46 19H31v-7z" fill="var(--surface)" opacity=".85"/>
+      <circle cx="20" cy="31" r="6" fill="#141310"/><circle cx="20" cy="31" r="2.4" fill="var(--surface)"/>
+      <circle cx="49" cy="31" r="6" fill="#141310"/><circle cx="49" cy="31" r="2.4" fill="var(--surface)"/>
+    </svg>
+  </div>
+</div>
 <header class="nav">
   <div class="wrap nav__inner">
     <nav class="nav__links" aria-label="Navigation principale">
@@ -622,6 +659,11 @@ img.testi__avatar { object-fit: cover; }
             <button class="mcar__arrow" type="button" id="mcarNext" aria-label="Partie suivante">&#8594;</button>
           </div>
           <div class="mcar__dots" id="mcarDots" aria-hidden="true"></div>
+          <div class="mcar__progress">
+            <div class="mcar__bar" aria-hidden="true"><span id="mcarBar"></span></div>
+            <span class="mcar__score"><strong id="mcarSeen">1</strong> / 14 parties explorées</span>
+          </div>
+          <div class="mcar__done" id="mcarDone" role="status">Vous avez fait le tour du SalesBook. On en parle ?</div>
         </div>
       </div>
     </div>
@@ -874,16 +916,27 @@ img.testi__avatar { object-fit: cover; }
   });
   var dots = dotsBox.children;
   var tabs = document.querySelectorAll('.mcar__tab');
+  var seen = [];
+  var bar = document.getElementById('mcarBar');
+  var score = document.getElementById('mcarSeen');
+  var done = document.getElementById('mcarDone');
   function stepIndex(k) { return k < 3 ? 0 : (k < 10 ? 1 : 2); }
   function render() {
     var it = items[i];
+    if (seen.indexOf(i) === -1) seen.push(i);
     document.getElementById('mcarStep').textContent = it.step;
     document.getElementById('mcarNum').textContent = it.n;
     document.getElementById('mcarTitle').textContent = it.t;
     document.getElementById('mcarDesc').textContent = it.d;
     document.getElementById('mcarCount').textContent = it.n + ' / 14';
-    for (var k = 0; k < dots.length; k++) dots[k].classList.toggle('is-on', k === i);
+    for (var k = 0; k < dots.length; k++) {
+      dots[k].classList.toggle('is-on', k === i);
+      dots[k].classList.toggle('is-seen', k !== i && seen.indexOf(k) !== -1);
+    }
     tabs.forEach(function (tab, k) { tab.classList.toggle('is-on', k === stepIndex(i)); });
+    if (bar) bar.style.width = (seen.length / items.length * 100) + '%';
+    if (score) score.textContent = seen.length;
+    if (done) done.classList.toggle('is-on', seen.length === items.length);
   }
   document.getElementById('mcarPrev').addEventListener('click', function () { i = (i + items.length - 1) % items.length; render(); });
   document.getElementById('mcarNext').addEventListener('click', function () { i = (i + 1) % items.length; render(); });
@@ -891,6 +944,87 @@ img.testi__avatar { object-fit: cover; }
     tab.addEventListener('click', function () { i = parseInt(tab.getAttribute('data-jump'), 10); render(); });
   });
   render();
+})();
+</script>
+
+<script>
+/* The 4L drives along the road as you scroll. */
+(function () {
+  var car = document.getElementById('roadCar');
+  var done = document.getElementById('roadDone');
+  if (!car || !done) return;
+  var ticking = false;
+
+  function drive() {
+    var doc = document.documentElement;
+    var body = document.body;
+    /* Depending on the CSS, the scroll can live on any of these three. */
+    var top = window.pageYOffset || doc.scrollTop || body.scrollTop || 0;
+    var height = Math.max(doc.scrollHeight, body.scrollHeight);
+    var max = Math.max(height - window.innerHeight, 1);
+    var pct = Math.min(Math.max(top / max, 0), 1);
+    car.style.left = (pct * 100) + '%';
+    done.style.width = (pct * 100) + '%';
+    ticking = false;
+  }
+
+  function onScroll() {
+    if (ticking) return;
+    ticking = true;
+    window.requestAnimationFrame(drive);
+  }
+
+  drive();
+  window.addEventListener('scroll', onScroll, { passive: true });
+  document.addEventListener('scroll', onScroll, { passive: true, capture: true });
+  window.addEventListener('resize', onScroll);
+})();
+</script>
+
+<script>
+/* Hero numbers count up the first time they come into view. */
+(function () {
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var stats = document.querySelectorAll('.hstat__v');
+  if (!stats.length || reduce || !window.IntersectionObserver) return;
+
+  function animate(el) {
+    var raw = el.textContent;
+    /* Matches "1 300" or "6" without swallowing the spaces around words like "a". */
+    var NUM = /\d+(?:[\s\u00a0\u202f]\d{3})*/g;
+    var parts = raw.match(NUM);
+    if (!parts) return;
+    var targets = parts.map(function (p) { return parseInt(p.replace(/\D/g, ''), 10); });
+    var start = null;
+    var dur = 900;
+    function frame(ts) {
+      if (!start) start = ts;
+      var p = Math.min((ts - start) / dur, 1);
+      var eased = 1 - Math.pow(1 - p, 3);
+      var k = 0;
+      el.textContent = raw.replace(NUM, function (m) {
+        var v = Math.round(targets[k] * eased);
+        k++;
+        /* Restore the thousands separator only where the original had one. */
+        return /[\s\u00a0\u202f]/.test(m)
+          ? v.toLocaleString('fr-FR').replace(/[\s\u00a0\u202f]/g, '\u202f')
+          : String(v);
+      });
+      if (p < 1) window.requestAnimationFrame(frame);
+      else el.textContent = raw;
+    }
+    window.requestAnimationFrame(frame);
+  }
+
+  var io = new IntersectionObserver(function (entries) {
+    entries.forEach(function (e) {
+      if (!e.isIntersecting) return;
+      animate(e.target);
+      io.unobserve(e.target);
+    });
+  }, { threshold: 0.6 });
+
+  stats.forEach(function (s) { io.observe(s); });
 })();
 </script>
 
