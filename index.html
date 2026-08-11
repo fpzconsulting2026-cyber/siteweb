@@ -94,6 +94,8 @@ body { padding-top: 26px; }
 @media (min-width: 940px) { .nav__links { display: flex; } }
 .nav__links a { font-family: var(--mono); font-size: var(--s--1); letter-spacing: 0.05em; text-transform: uppercase; color: var(--muted); transition: color .2s; }
 .nav__links a:hover { color: var(--blue-soft); }
+.nav__label { display: flex; align-items: center; font-family: var(--mono); font-size: var(--s--1); letter-spacing: 0.05em; text-transform: uppercase; color: var(--brass); font-weight: 600; }
+.nav__label::after { content: ""; display: inline-block; width: 1px; height: 1em; margin-left: 1.7rem; background: var(--line); }
 .nav .btn { padding: 0.55em 1.05em; font-size: var(--s--1); }
 
 /* Hero */
@@ -491,6 +493,7 @@ img.testi__avatar { object-fit: cover; }
 <header class="nav">
   <div class="wrap nav__inner">
     <nav class="nav__links" aria-label="Navigation principale">
+      <span class="nav__label">Setter Multicanal &amp; Cold Caller</span>
       <a href="#resultats">Résultats</a>
       <a href="#ecoute">Écoutez mes appels</a>
       <a href="#methode">Méthode</a>
