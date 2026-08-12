@@ -1047,31 +1047,107 @@ img.testi__avatar { object-fit: cover; }
   }
   raf = window.requestAnimationFrame(tick);
 
-  /* Phone-like buzz pattern while it rings, where supported. */
-  if (navigator.vibrate) {
-    var buzz = function () { navigator.vibrate([120, 90, 120, 700]); };
-    buzz();
-    vibrate = window.setInterval(buzz, 1030);
+  var Ctx = window.AudioContext || window.webkitAudioContext;
+  var ctx = null;
+  var ringTimer = null;
+  var VIBRATE_PATTERN = [400, 200, 400, 1400];
+
+  /* One ring burst: the classic 440 + 480 Hz pair, trilled so it reads as a
+     phone rather than a beep. */
+  function burst(at) {
+    var trill = ctx.createOscillator();
+    var trillGain = ctx.createGain();
+    trill.type = 'square';
+    trill.frequency.value = 20;
+    trillGain.gain.value = 0.5;
+    trill.connect(trillGain);
+
+    var out = ctx.createGain();
+    out.gain.setValueAtTime(0.0001, at);
+    out.gain.exponentialRampToValueAtTime(0.13, at + 0.04);
+    out.gain.setValueAtTime(0.13, at + 1.05);
+    out.gain.exponentialRampToValueAtTime(0.0001, at + 1.15);
+    out.connect(ctx.destination);
+
+    [440, 480].forEach(function (f) {
+      var osc = ctx.createOscillator();
+      var g = ctx.createGain();
+      osc.type = 'sine';
+      osc.frequency.value = f;
+      g.gain.value = 0.5;
+      trillGain.connect(g.gain);
+      osc.connect(g).connect(out);
+      osc.start(at);
+      osc.stop(at + 1.2);
+    });
+
+    trill.start(at);
+    trill.stop(at + 1.2);
+  }
+
+  function ringOnce() {
+    if (!ctx || closed) return;
+    burst(ctx.currentTime);
+    burst(ctx.currentTime + 1.45);
+    if (navigator.vibrate) navigator.vibrate(VIBRATE_PATTERN);
+  }
+
+  /* Autoplay is blocked until the visitor interacts, so try now and fall back
+     to the first gesture. */
+  function startRinging() {
+    if (closed || ringTimer || !Ctx) return;
+    try {
+      if (!ctx) ctx = new Ctx();
+      var go = function () {
+        if (closed || ringTimer) return;
+        ringOnce();
+        ringTimer = window.setInterval(ringOnce, 3400);
+      };
+      if (ctx.state === 'suspended') {
+        var p = ctx.resume();
+        if (p && p.then) p.then(go).catch(function () {});
+        else go();
+      } else {
+        go();
+      }
+    } catch (e) {}
+  }
+
+  var GESTURES = ['pointerdown', 'keydown', 'touchstart', 'wheel'];
+  function onFirstGesture() {
+    GESTURES.forEach(function (ev) { window.removeEventListener(ev, onFirstGesture, true); });
+    startRinging();
+  }
+  GESTURES.forEach(function (ev) { window.addEventListener(ev, onFirstGesture, true); });
+  startRinging();
+
+  function stopRinging() {
+    if (ringTimer) { window.clearInterval(ringTimer); ringTimer = null; }
+    GESTURES.forEach(function (ev) { window.removeEventListener(ev, onFirstGesture, true); });
+    if (ctx) {
+      try { ctx.close(); } catch (e) {}
+      ctx = null;
+    }
   }
 
   function pickUpSound() {
-    var Ctx = window.AudioContext || window.webkitAudioContext;
     if (!Ctx) return;
     try {
-      var ctx = new Ctx();
-      var now = ctx.currentTime;
+      var c = new Ctx();
+      var now = c.currentTime;
       [{ f: 660, t: 0, d: 0.09 }, { f: 990, t: 0.1, d: 0.14 }].forEach(function (tone) {
-        var osc = ctx.createOscillator();
-        var gain = ctx.createGain();
+        var osc = c.createOscillator();
+        var gain = c.createGain();
         osc.type = 'sine';
         osc.frequency.value = tone.f;
         gain.gain.setValueAtTime(0.0001, now + tone.t);
         gain.gain.exponentialRampToValueAtTime(0.16, now + tone.t + 0.02);
         gain.gain.exponentialRampToValueAtTime(0.0001, now + tone.t + tone.d);
-        osc.connect(gain).connect(ctx.destination);
+        osc.connect(gain).connect(c.destination);
         osc.start(now + tone.t);
         osc.stop(now + tone.t + tone.d + 0.02);
       });
+      window.setTimeout(function () { try { c.close(); } catch (e) {} }, 600);
     } catch (e) {}
   }
 
@@ -1082,6 +1158,7 @@ img.testi__avatar { object-fit: cover; }
     if (vibrate) window.clearInterval(vibrate);
     if (autoClose) window.clearTimeout(autoClose);
     if (navigator.vibrate) navigator.vibrate(0);
+    stopRinging();
     if (withSound) {
       pickUpSound();
       status.textContent = 'En ligne';
