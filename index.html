@@ -71,6 +71,44 @@ a { color: inherit; text-decoration: none; }
 /* Nav */
 /* Road progress bar with the 4L driving along it */
 body { padding-top: 26px; }
+/* Incoming call screen */
+.ring { position: fixed; inset: 0; z-index: 200; display: grid; place-items: center; background: var(--navy); }
+.ring[hidden] { display: none; }
+.ring.is-out { animation: ring-out .45s ease forwards; }
+@keyframes ring-out { to { opacity: 0; transform: scale(1.04); visibility: hidden; } }
+.ring__card { text-align: center; display: grid; justify-items: center; gap: 0.55rem; padding: 2rem 1.5rem; animation: ring-shake 1.1s ease-in-out infinite; }
+@keyframes ring-shake {
+  0%, 62%, 100% { transform: translateX(0) rotate(0); }
+  66% { transform: translateX(-5px) rotate(-1.1deg); }
+  70% { transform: translateX(5px) rotate(1.1deg); }
+  74% { transform: translateX(-4px) rotate(-.9deg); }
+  78% { transform: translateX(4px) rotate(.9deg); }
+  82% { transform: translateX(-2px) rotate(-.4deg); }
+  86% { transform: translateX(2px) rotate(.4deg); }
+}
+.ring__status { font-family: var(--mono); font-size: var(--s--1); letter-spacing: .1em; text-transform: uppercase; color: var(--blue); margin: 0; }
+.ring__avatar { position: relative; width: 120px; height: 120px; display: grid; place-items: center; margin: 0.6rem 0; }
+.ring__avatar img { width: 120px; height: 120px; border-radius: 50%; object-fit: cover; object-position: 50% 22%; border: 3px solid var(--blue); position: relative; z-index: 2; background: var(--surface); }
+.ring__wave { position: absolute; inset: -6px; border-radius: 50%; border: 2px solid var(--blue); opacity: 0; animation: ring-pulse 1.8s ease-out infinite; }
+.ring__wave--2 { animation-delay: .6s; }
+@keyframes ring-pulse { 0% { transform: scale(1); opacity: .55; } 100% { transform: scale(1.75); opacity: 0; } }
+.ring__name { font-family: var(--display); font-weight: 800; font-size: var(--s-2); margin: 0; }
+.ring__sub { font-family: var(--mono); font-size: var(--s--1); color: var(--muted); margin: 0; }
+.ring__timer { font-family: var(--mono); font-size: var(--s--1); color: var(--muted); margin: 0.2rem 0 0; font-variant-numeric: tabular-nums; }
+.ring__actions { display: flex; gap: 0.9rem; margin-top: 1.4rem; flex-wrap: wrap; justify-content: center; }
+.ring__btn { font: inherit; font-weight: 700; cursor: pointer; border-radius: 100px; padding: 0.85em 1.6em; border: 1px solid transparent; display: inline-flex; align-items: center; gap: 0.5em; transition: transform .2s, background .2s; }
+.ring__btn svg { width: 1.1em; height: 1.1em; }
+.ring__btn--yes { background: var(--blue); color: #fff; box-shadow: 0 12px 26px -12px rgba(4,8,20,.55); }
+.ring__btn--yes:hover { transform: translateY(-2px); }
+.ring__btn--no { background: transparent; border-color: var(--line); color: var(--muted); }
+.ring__btn--no:hover { color: var(--paper); border-color: var(--paper); }
+.ring__hint { font-family: var(--mono); font-size: var(--s--2, .72rem); color: var(--muted); margin: 1.1rem 0 0; opacity: .75; }
+@media (prefers-reduced-motion: reduce) {
+  .ring__card { animation: none; }
+  .ring__wave { animation: none; opacity: .3; }
+  .ring.is-out { animation: none; opacity: 0; visibility: hidden; }
+}
+
 .road { position: fixed; top: 0; left: 0; right: 0; height: 26px; z-index: 60; pointer-events: none; background: var(--navy); }
 .road__tarmac { position: absolute; left: 0; right: 0; bottom: 0; height: 5px; background: var(--line); }
 .road__done { position: absolute; left: 0; bottom: 0; height: 5px; width: 0; background: var(--blue); }
@@ -477,6 +515,29 @@ img.testi__avatar { object-fit: cover; }
 </head>
 <body>
 <div class="grain" aria-hidden="true"></div>
+
+<!-- Incoming call screen. Hidden by default: only JS reveals it, so no-JS visitors land straight on the site. -->
+<div class="ring" id="ringScreen" hidden>
+  <div class="ring__card" role="dialog" aria-label="Appel entrant de Florian Penez">
+    <p class="ring__status" id="ringStatus">Appel entrant…</p>
+    <div class="ring__avatar">
+      <span class="ring__wave" aria-hidden="true"></span>
+      <span class="ring__wave ring__wave--2" aria-hidden="true"></span>
+      <img src="assets/hero-hook-florian.jpg" alt="" width="120" height="120">
+    </div>
+    <p class="ring__name">Florian Penez</p>
+    <p class="ring__sub">SDR Senior · Closer &amp; Setter BtoB</p>
+    <p class="ring__timer" id="ringTimer">00:00</p>
+    <div class="ring__actions">
+      <button class="ring__btn ring__btn--no" type="button" id="ringSkip">Ignorer</button>
+      <button class="ring__btn ring__btn--yes" type="button" id="ringAnswer">
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M6.6 10.8c1.4 2.8 3.8 5.2 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1C10.6 21 3 13.4 3 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1L6.6 10.8z"/></svg>
+        Décrocher
+      </button>
+    </div>
+    <p class="ring__hint">Entrée pour décrocher · Échap pour passer</p>
+  </div>
+</div>
 <div class="road" id="road" aria-hidden="true">
   <div class="road__tarmac"></div>
   <div class="road__done" id="roadDone"></div>
@@ -947,6 +1008,102 @@ img.testi__avatar { object-fit: cover; }
     tab.addEventListener('click', function () { i = parseInt(tab.getAttribute('data-jump'), 10); render(); });
   });
   render();
+})();
+</script>
+
+<script>
+/* Incoming call screen. Shown once per session, always escapable.
+   Browsers block audio before a gesture, so the ring is visual and the sound
+   only fires when the visitor answers. */
+(function () {
+  var screen = document.getElementById('ringScreen');
+  if (!screen) return;
+
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var seen;
+  try { seen = window.sessionStorage.getItem('fpz-call') === '1'; } catch (e) { seen = false; }
+  if (seen || reduce) return;
+
+  var answer = document.getElementById('ringAnswer');
+  var skip = document.getElementById('ringSkip');
+  var status = document.getElementById('ringStatus');
+  var timerEl = document.getElementById('ringTimer');
+  var started = null;
+  var raf = null;
+  var autoClose = null;
+  var vibrate = null;
+  var closed = false;
+
+  screen.hidden = false;
+  document.body.style.overflow = 'hidden';
+
+  try { window.sessionStorage.setItem('fpz-call', '1'); } catch (e) {}
+
+  function tick(ts) {
+    if (!started) started = ts;
+    var s = Math.floor((ts - started) / 1000);
+    timerEl.textContent = '00:' + (s < 10 ? '0' : '') + s;
+    raf = window.requestAnimationFrame(tick);
+  }
+  raf = window.requestAnimationFrame(tick);
+
+  /* Phone-like buzz pattern while it rings, where supported. */
+  if (navigator.vibrate) {
+    var buzz = function () { navigator.vibrate([120, 90, 120, 700]); };
+    buzz();
+    vibrate = window.setInterval(buzz, 1030);
+  }
+
+  function pickUpSound() {
+    var Ctx = window.AudioContext || window.webkitAudioContext;
+    if (!Ctx) return;
+    try {
+      var ctx = new Ctx();
+      var now = ctx.currentTime;
+      [{ f: 660, t: 0, d: 0.09 }, { f: 990, t: 0.1, d: 0.14 }].forEach(function (tone) {
+        var osc = ctx.createOscillator();
+        var gain = ctx.createGain();
+        osc.type = 'sine';
+        osc.frequency.value = tone.f;
+        gain.gain.setValueAtTime(0.0001, now + tone.t);
+        gain.gain.exponentialRampToValueAtTime(0.16, now + tone.t + 0.02);
+        gain.gain.exponentialRampToValueAtTime(0.0001, now + tone.t + tone.d);
+        osc.connect(gain).connect(ctx.destination);
+        osc.start(now + tone.t);
+        osc.stop(now + tone.t + tone.d + 0.02);
+      });
+    } catch (e) {}
+  }
+
+  function close(withSound) {
+    if (closed) return;
+    closed = true;
+    if (raf) window.cancelAnimationFrame(raf);
+    if (vibrate) window.clearInterval(vibrate);
+    if (autoClose) window.clearTimeout(autoClose);
+    if (navigator.vibrate) navigator.vibrate(0);
+    if (withSound) {
+      pickUpSound();
+      status.textContent = 'En ligne';
+    }
+    screen.classList.add('is-out');
+    window.setTimeout(function () {
+      screen.hidden = true;
+      document.body.style.overflow = '';
+    }, withSound ? 450 : 250);
+  }
+
+  answer.addEventListener('click', function () { close(true); });
+  skip.addEventListener('click', function () { close(false); });
+  document.addEventListener('keydown', function (e) {
+    if (closed) return;
+    if (e.key === 'Escape') close(false);
+    if (e.key === 'Enter') close(true);
+  });
+
+  /* Never trap anyone: it lets go on its own. */
+  autoClose = window.setTimeout(function () { close(false); }, 9000);
+  answer.focus();
 })();
 </script>
 
